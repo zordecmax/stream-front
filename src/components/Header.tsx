@@ -1,17 +1,23 @@
 'use client';
 
 import { useState } from 'react';
+import AuthModal from './AuthModal';
+import Link from 'next/link';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [authOpen, setAuthOpen] = useState(false);
+  const { userEmail, logout } = useAuth();
 
   return (
+    <>
     <header className="fixed top-0 left-0 right-0 z-40 bg-gray-900/95 backdrop-blur-md border-b border-gray-800">
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 py-4">
         <div className="flex items-center justify-between gap-6">
           {/* Logo */}
           <div className="flex items-center gap-8">
-            <a href="/" className="flex items-center group">
+            <Link href="/" className="flex items-center group">
               <svg 
                 className="h-8 w-auto" 
                 viewBox="0 0 200 40" 
@@ -34,7 +40,7 @@ export default function Header() {
                   </linearGradient>
                 </defs>
               </svg>
-            </a>
+            </Link>
 
             {/* Navigation - Desktop */}
             <nav className="hidden md:flex items-center gap-6">
@@ -114,20 +120,25 @@ export default function Header() {
               <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
             </button>
 
-            {/* User Profile */}
-            <button 
-              className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-gray-800 transition-colors"
-              aria-label="User menu"
-            >
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm">
-                U
+            {/* User/Profile or Sign in */}
+            {userEmail ? (
+              <div className="flex items-center gap-2">
+                <span className="text-gray-300 text-sm">{userEmail}</span>
+                <button onClick={logout} className="bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 rounded">Logout</button>
               </div>
-            </button>
+            ) : (
+              <button onClick={()=>setAuthOpen(true)} className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-gray-800 transition-colors" aria-label="Sign in">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm">U</div>
+                <span className="hidden md:inline text-white">Sign in</span>
+              </button>
+            )}
 
             {/* Sign Up Button */}
-            <button className="hidden lg:block bg-purple-600 hover:bg-purple-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors">
-              Sign Up
-            </button>
+            {!userEmail && (
+              <button onClick={()=>setAuthOpen(true)} className="hidden lg:block bg-purple-600 hover:bg-purple-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors">
+                Sign Up
+              </button>
+            )}
 
             {/* Mobile Menu */}
             <button 
@@ -142,5 +153,7 @@ export default function Header() {
         </div>
       </div>
     </header>
+    <AuthModal isOpen={authOpen} onClose={()=>setAuthOpen(false)} />
+    </>
   );
 }
