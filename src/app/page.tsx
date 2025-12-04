@@ -4,12 +4,13 @@ import { useMemo, useState } from 'react';
 import Header from '@/components/Header';
 import Image from 'next/image';
 import TrendingRow from '@/components/TrendingRow';
+import RecommendedGrid from '@/components/RecommendedGrid';
 import ContentModal from '@/components/ContentModal';
 import { StreamContent } from '@/components/TrendingRow';
 import { useStreamingData, StreamingItem } from '@/hooks/useStreamingData';
 
 // Mock data for demonstration
-// Fallback/mock data (not used when API succeeds)
+// Fallback/mock data (currently unused)
 const mockStreams: StreamContent[] = [
   {
     id: '1',
@@ -167,12 +168,12 @@ export default function Home() {
           onItemClick={handleContentClick}
         /> */}
 
-        {/* Recommended */}
-        {/* <TrendingRow 
+        {/* Recommended Grid */}
+        <RecommendedGrid
           title="Recommended for You"
-          items={[...mockStreams].reverse()}
+          items={liveItems.length ? liveItems : mockStreams}
           onItemClick={handleContentClick}
-        /> */}
+        />
       </main>
 
       {/* Modal */}

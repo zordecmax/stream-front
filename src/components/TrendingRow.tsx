@@ -10,7 +10,8 @@ export interface StreamContent {
   streamer: string;
   viewers: string;
   game: string;
-  thumbnail: string;
+  thumbnail?: string;
+  thumbnailUrl?: string;
   tags: string[];
   isLive?: boolean;
   bunnyConfig?: BunnyVideoConfig;

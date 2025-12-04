@@ -87,12 +87,13 @@ export default function ContentModal({ isOpen, content, onClose }: ContentModalP
               config={content.bunnyConfig}
               autoPlay
               muted
+              poster={content.thumbnailUrl}
               className="w-full h-full object-contain"
             />
           ) : (
             <>
               <Image
-                src={content.thumbnail}
+                src={content.thumbnailUrl}
                 alt={content.title}
                 fill
                 className="object-cover"

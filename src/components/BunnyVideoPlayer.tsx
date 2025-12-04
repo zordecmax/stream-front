@@ -21,6 +21,7 @@ export type BunnyVideoPlayerProps = {
   muted?: boolean;
   loop?: boolean;
   className?: string;
+  poster?: string;
 };
 
 const DEFAULT_VIDEO_ID = 'e0911256-b712-4b72-83ed-4b046a654e81';
@@ -30,11 +31,11 @@ function buildManifestUrl({ storageZoneId, storageDomain = 'b-cdn.net', cdnHostn
   if (!host) throw new Error('BunnyVideoPlayer: Missing CDN host. Provide cdnHostname or storageZoneId.');
   const id = videoId && videoId.length > 0 ? videoId : DEFAULT_VIDEO_ID;
 //   console.log('BunnyVideoPlayer: Using manifest URL', { host, id });
-  console.log('Video id:', videoId);
+
   return `https://${host}/${id}/playlist.m3u8`;
 }
 
-export default function BunnyVideoPlayer({ config, autoPlay = false, muted = false, loop = false, className }:
+export default function BunnyVideoPlayer({ config, autoPlay = false, muted = false, loop = false, className, poster }:
   BunnyVideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const plyrRef = useRef<Plyr | null>(null);
@@ -116,6 +117,7 @@ console.log('BunnyVideoPlayer config:', config);
       className={className}
       playsInline
       controls
+      poster={poster}
     />
   );
 }
