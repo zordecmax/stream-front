@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useEffect, useRef } from 'react';
+import { useWatchHistory } from '../hooks/useWatchHistory';
 import Hls, { Events as HlsEvents, ErrorTypes as HlsErrorTypes } from 'hls.js';
 
 export type BunnyVideoConfig = {
@@ -22,6 +23,8 @@ export type BunnyVideoPlayerProps = {
   loop?: boolean;
   className?: string;
   poster?: string;
+  /** Optional identifier used to save/load watch progress (0-100%). */
+  watchId?: string;
 };
 
 const DEFAULT_VIDEO_ID = 'e0911256-b712-4b72-83ed-4b046a654e81';
@@ -35,10 +38,11 @@ function buildManifestUrl({ storageZoneId, storageDomain = 'b-cdn.net', cdnHostn
   return `https://${host}/${id}/playlist.m3u8`;
 }
 
-export default function BunnyVideoPlayer({ config, autoPlay = false, muted = false, loop = false, className, poster }:
+export default function BunnyVideoPlayer({ config, autoPlay = false, muted = false, loop = false, className, poster, watchId }:
   BunnyVideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const plyrRef = useRef<Plyr | null>(null);
+  const { getProgress, setProgress } = useWatchHistory();
 console.log('BunnyVideoPlayer config:', config);
   useEffect(() => {
     const video = videoRef.current;
@@ -61,7 +65,7 @@ console.log('BunnyVideoPlayer config:', config);
     };
     setupPlyr();
 
-    const manifestUrl = buildManifestUrl(config);
+  const manifestUrl = buildManifestUrl(config);
 
     // If HLS is supported natively (Safari), set src directly
     if (video.canPlayType('application/vnd.apple.mpegurl')) {
@@ -73,7 +77,7 @@ console.log('BunnyVideoPlayer config:', config);
         lowLatencyMode: true,
       });
       hls.loadSource(manifestUrl);
-      hls.attachMedia(video);
+  hls.attachMedia(video);
 
   const onError = (_event: string, data: { fatal?: boolean; type?: string }) => {
         // Try to recover on certain errors
@@ -103,13 +107,35 @@ console.log('BunnyVideoPlayer config:', config);
       video.src = manifestUrl;
     }
 
+    // Restore progress after metadata is loaded
+    const onLoadedMetadata = () => {
+      if (!watchId) return;
+      const percent = getProgress(watchId);
+      if (percent > 0 && video.duration && isFinite(video.duration)) {
+        const targetTime = (percent / 100) * video.duration;
+        // Seek a bit earlier to give context, but not below 0
+        video.currentTime = Math.max(0, targetTime - 2);
+      }
+    };
+    video.addEventListener('loadedmetadata', onLoadedMetadata);
+
+    // Save progress periodically
+    const onTimeUpdate = () => {
+      if (!watchId || !video.duration || !isFinite(video.duration)) return;
+      const percent = (video.currentTime / video.duration) * 100;
+      setProgress(watchId, percent);
+    };
+    video.addEventListener('timeupdate', onTimeUpdate);
+
     return () => {
+      video.removeEventListener('loadedmetadata', onLoadedMetadata);
+      video.removeEventListener('timeupdate', onTimeUpdate);
       if (plyrRef.current) {
         plyrRef.current.destroy();
         plyrRef.current = null;
       }
     };
-  }, [config, autoPlay, muted, loop]);
+  }, [config, autoPlay, muted, loop, getProgress, setProgress, watchId]);
 
   return (
     <video

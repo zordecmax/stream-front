@@ -25,18 +25,10 @@ export default function ContentCard({ content, onClick }: ContentCardProps) {
     >
       {/* Thumbnail/Player Container */}
       <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-800 mb-3">
-        {content.bunnyConfig && false ? (
-          <BunnyVideoPlayer
-            config={content.bunnyConfig}
-            muted
-            autoPlay={false}
-            poster={content.thumbnailUrl || content.thumbnail}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        ) : (
+        {
           (content.thumbnailUrl || content.thumbnail) ? (
             <Image
-              src={content.thumbnailUrl || content.thumbnail}
+              src={(content.thumbnailUrl || content.thumbnail)!}
               alt={`${content.title} - ${content.streamer}`}
               fill
               className="object-cover"
@@ -45,7 +37,7 @@ export default function ContentCard({ content, onClick }: ContentCardProps) {
           ) : (
             <div className="absolute inset-0 bg-gray-700" aria-hidden="true" />
           )
-        )}
+        }
         
         {/* Live Badge */}
         {content.isLive && (

@@ -7,10 +7,11 @@ interface RecommendedGridProps {
   title?: string;
   items: StreamContent[];
   onItemClick: (item: StreamContent) => void;
+  loading?: boolean;
 }
 
-export default function RecommendedGrid({ title = 'Recommended for You', items, onItemClick }: RecommendedGridProps) {
-  const showSkeleton = !items || items.length === 0;
+export default function RecommendedGrid({ title = 'Recommended for You', items, onItemClick, loading = false }: RecommendedGridProps) {
+  const showSkeleton = loading;
 
   return (
     <section className="mb-8 md:mb-12">

@@ -87,13 +87,14 @@ export default function ContentModal({ isOpen, content, onClose }: ContentModalP
               config={content.bunnyConfig}
               autoPlay
               muted
+              watchId={content.id}
               poster={content.thumbnailUrl}
               className="w-full h-full object-contain"
             />
           ) : (
             <>
               <Image
-                src={content.thumbnailUrl}
+                src={content.thumbnailUrl || content.thumbnail || '/window.svg'}
                 alt={content.title}
                 fill
                 className="object-cover"

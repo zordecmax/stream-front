@@ -1,14 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AuthModal from './AuthModal';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
+import { useSearchParams } from 'next/navigation';
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [authOpen, setAuthOpen] = useState(false);
   const { userEmail, logout } = useAuth();
+  const params = useSearchParams();
+
+  useEffect(() => {
+    const q = params.get('q') || '';
+    Promise.resolve().then(() => setSearchQuery(q));
+  }, [params]);
 
   return (
     <>
@@ -73,9 +80,10 @@ export default function Header() {
 
           {/* Search Bar */}
           <div className="flex-1 max-w-md hidden sm:block">
-            <div className="relative">
+            <form className="relative" action="/search" method="GET">
               <input
                 type="text"
+                name="q"
                 placeholder="Search streams, games, or users..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -94,7 +102,7 @@ export default function Header() {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-            </div>
+            </form>
           </div>
 
           {/* Right Side Actions */}
