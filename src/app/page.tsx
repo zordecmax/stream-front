@@ -91,7 +91,7 @@ export default function Home() {
     refreshInterval: 0, // optional (ms); e.g., 60000 for 1 min
   });
 
-  console.log('Streaming Data:', { data, loading, error });
+
 
   const CDN_HOSTNAME = 'vz-86921353-a1a.b-cdn.net';
 

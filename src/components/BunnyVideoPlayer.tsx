@@ -33,7 +33,7 @@ function buildManifestUrl({ storageZoneId, storageDomain = 'b-cdn.net', cdnHostn
   const host = cdnHostname ?? (storageZoneId ? `${storageZoneId}.${storageDomain}` : undefined);
   if (!host) throw new Error('BunnyVideoPlayer: Missing CDN host. Provide cdnHostname or storageZoneId.');
   const id = videoId && videoId.length > 0 ? videoId : DEFAULT_VIDEO_ID;
-//   console.log('BunnyVideoPlayer: Using manifest URL', { host, id });
+
 
   return `https://${host}/${id}/playlist.m3u8`;
 }
@@ -43,7 +43,7 @@ export default function BunnyVideoPlayer({ config, autoPlay = false, muted = fal
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const plyrRef = useRef<Plyr | null>(null);
   const { getProgress, setProgress } = useWatchHistory();
-console.log('BunnyVideoPlayer config:', config);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
