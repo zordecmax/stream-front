@@ -5,6 +5,7 @@ import RecommendedGrid from '@/components/RecommendedGrid';
 import type { StreamingItem } from '@/hooks/useStreamingData';
 import type { StreamContent } from '@/components/TrendingRow';
 import Header from '@/components/Header';
+import ContentModal from '@/components/ContentModal';
 
 const SEARCH_API = 'https://stream-be.onrender.com/api/streaming/search/query';
 const CDN_HOSTNAME = 'vz-86921353-a1a.b-cdn.net';
@@ -14,6 +15,8 @@ export default function SearchPage() {
   const [data, setData] = useState<StreamingItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedContent, setSelectedContent] = useState<StreamContent | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Read query from URL on client to avoid Suspense requirements
   useEffect(() => {
@@ -89,8 +92,21 @@ export default function SearchPage() {
             </div>
           </div>
         )}
-        <RecommendedGrid title="Results" items={items} onItemClick={() => {}} loading={loading} />
+        <RecommendedGrid
+          title="Results"
+          items={items}
+          onItemClick={(item) => { setSelectedContent(item); setIsModalOpen(true); }}
+          loading={loading}
+        />
       </main>
+      {/* Modal */}
+      {selectedContent && (
+        <ContentModal
+          isOpen={isModalOpen}
+          onClose={() => { setIsModalOpen(false); setTimeout(() => setSelectedContent(null), 200); }}
+          content={selectedContent}
+        />
+      )}
     </div>
   );
 }
