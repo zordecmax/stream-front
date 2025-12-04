@@ -161,13 +161,7 @@ export default function Home() {
           onItemClick={handleContentClick}
         />
 
-        {/* Browse Categories */}
-        {/* <TrendingRow 
-          title="Browse Categories"
-          items={categories}
-          onItemClick={handleContentClick}
-        /> */}
-
+      
         {/* Recommended Grid */}
         <RecommendedGrid
           title="Recommended for You"

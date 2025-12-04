@@ -4,18 +4,18 @@ import { useEffect, useState } from 'react';
 import AuthModal from './AuthModal';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
-import { useSearchParams } from 'next/navigation';
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [authOpen, setAuthOpen] = useState(false);
   const { userEmail, logout } = useAuth();
-  const params = useSearchParams();
-
+  // Read query from URL on client without useSearchParams to avoid SSR Suspense requirement
   useEffect(() => {
-    const q = params.get('q') || '';
+    if (typeof window === 'undefined') return;
+    const q = new URLSearchParams(window.location.search).get('q') || '';
+    // microtask to avoid React state update during render warnings
     Promise.resolve().then(() => setSearchQuery(q));
-  }, [params]);
+  }, []);
 
   return (
     <>
