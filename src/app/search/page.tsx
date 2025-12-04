@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import RecommendedGrid from '@/components/RecommendedGrid';
 import type { StreamingItem } from '@/hooks/useStreamingData';
 import type { StreamContent } from '@/components/TrendingRow';
@@ -11,11 +10,18 @@ const SEARCH_API = 'https://stream-be.onrender.com/api/streaming/search/query';
 const CDN_HOSTNAME = 'vz-86921353-a1a.b-cdn.net';
 
 export default function SearchPage() {
-  const params = useSearchParams();
-  const q = params.get('q') ?? '';
+  const [q, setQ] = useState<string>('');
   const [data, setData] = useState<StreamingItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Read query from URL on client to avoid Suspense requirements
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const qs = new URLSearchParams(window.location.search).get('q') || '';
+    // microtask to align with React state timing
+    Promise.resolve().then(() => setQ(qs));
+  }, []);
 
   useEffect(() => {
     const controller = new AbortController();
