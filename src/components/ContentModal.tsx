@@ -4,17 +4,25 @@ import { useEffect, useRef } from 'react';
 import { StreamContent } from './TrendingRow';
 import Image from 'next/image';
 import BunnyVideoPlayer from './BunnyVideoPlayer';
+import MuxVideoPlayer from './MuxVideoPlayer';
+
+interface LiveStreamContent  {
+  playbackId: string;
+  id: string;
+  title: string;
+}
 
 interface ContentModalProps {
   isOpen: boolean;
-  content: StreamContent | null;
+  content: StreamContent | LiveStreamContent | null;
   onClose: () => void;
+  isLive?: boolean;
 }
 
-export default function ContentModal({ isOpen, content, onClose }: ContentModalProps) {
+export default function ContentModal({ isOpen, content, onClose, isLive }: ContentModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-
+console.log('ContentModal render - isOpen:', isOpen, 'content:', content);
   // Handle Escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -82,6 +90,22 @@ export default function ContentModal({ isOpen, content, onClose }: ContentModalP
 
         {/* Video/Thumbnail Section */}
         <div className="relative aspect-video bg-black">
+            {content && 'playbackId' in content && content.playbackId ? (
+                <MuxVideoPlayer
+                            //   playbackId="7HBZewFQmdx2vj2VRHBf7LaBNnnkwB5XlmJw2lXmq4Q"
+                              playbackId={content.playbackId}
+                              metadata={{
+                                video_id: content.id,
+                                video_title: content.title
+                              }}
+                              autoPlay={true}
+                              muted={false}
+                              loop={false}
+                              className="w-full h-full object-contain"
+                            />
+            ):(<>
+            
+            </>)}
           {content.bunnyConfig ? (
             <BunnyVideoPlayer
               config={content.bunnyConfig}
@@ -115,7 +139,7 @@ export default function ContentModal({ isOpen, content, onClose }: ContentModalP
           )}
 
           {/* Live Badge */}
-          {content.isLive && (
+          {content && 'playbackId' in content && content.playbackId && (
             <div className="absolute top-4 left-4 bg-red-600 text-white text-sm font-bold px-3 py-1.5 rounded flex items-center gap-2">
               <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
               LIVE
@@ -136,10 +160,10 @@ export default function ContentModal({ isOpen, content, onClose }: ContentModalP
               <div className="flex items-center gap-3 text-gray-400">
                 <span className="font-semibold text-purple-400">{content.streamer}</span>
                 <span>•</span>
-                <span className="flex items-center gap-1">
+                {content.viewers &&(<span className="flex items-center gap-1">
                   <span className="w-2 h-2 bg-red-500 rounded-full"></span>
                   {content.viewers} viewers
-                </span>
+                </span>)}
               </div>
             </div>
           </div>

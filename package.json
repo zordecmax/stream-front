@@ -10,24 +10,26 @@
     "test": "vitest"
   },
   "dependencies": {
-    "next": "16.0.6",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
+    "@mux/mux-player": "^3.10.0",
+    "@mux/mux-player-react": "^3.10.0",
     "hls.js": "^1.5.11",
-    "plyr": "^3.7.8"
+    "next": "16.0.6",
+    "plyr": "^3.7.8",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^16.0.0",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
     "eslint": "^9",
     "eslint-config-next": "16.0.6",
+    "jsdom": "^24.0.0",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "vitest": "^2.0.5",
-    "@testing-library/react": "^16.0.0",
-    "@testing-library/jest-dom": "^6.4.5",
-    "jsdom": "^24.0.0"
+    "vitest": "^2.0.5"
   }
 }

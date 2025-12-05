@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'vz-86921353-a1a.b-cdn.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'image.mux.com',
+      },
     ],
   },
 };

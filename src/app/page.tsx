@@ -3,11 +3,13 @@
 import { useMemo, useState } from 'react';
 import Header from '@/components/Header';
 import Image from 'next/image';
-import TrendingRow from '@/components/TrendingRow';
+import TrendingRow, { LiveStreamContent } from '@/components/TrendingRow';
 import RecommendedGrid from '@/components/RecommendedGrid';
 import ContentModal from '@/components/ContentModal';
 import { StreamContent } from '@/components/TrendingRow';
 import { useStreamingData, StreamingItem } from '@/hooks/useStreamingData';
+import MuxVideoPlayer from '@/components/MuxVideoPlayer';
+import { useLiveStreamingData } from '@/hooks/useLiveStreamingData';
 
 // Mock data for demonstration
 // Fallback/mock data (currently unused)
@@ -82,7 +84,7 @@ const mockStreams: StreamContent[] = [
 // const categories = [ /* unused in current view */ ];
 
 export default function Home() {
-  const [selectedContent, setSelectedContent] = useState<StreamContent | null>(null);
+  const [selectedContent, setSelectedContent] = useState<StreamContent | LiveStreamContent| null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data, loading, error } = useStreamingData({
@@ -90,6 +92,8 @@ export default function Home() {
     genre: '',          // optional
     refreshInterval: 0, // optional (ms); e.g., 60000 for 1 min
   });
+
+  const { data: liveData, loading: liveLoading, error: liveError, refresh } = useLiveStreamingData({ refreshInterval: 30000 });
 
 
 
@@ -121,7 +125,7 @@ export default function Home() {
     return data.map(mapItemToContent);
   }, [data]);
 
-  const handleContentClick = (content: StreamContent) => {
+  const handleContentClick = (content: StreamContent | LiveStreamContent) => {
     setSelectedContent(content);
     setIsModalOpen(true);
   };
@@ -153,13 +157,21 @@ export default function Home() {
             </div>
           </div>
         </section>
-
+      
         {/* Live Channels */}
         <TrendingRow 
-          title="Live Channels"
-          items={liveItems}
+          title="Live streams"
+          items={liveData}
+          loading={liveLoading}
           onItemClick={handleContentClick}
         />
+       {/* Recorded Videos */}
+        {/* <TrendingRow 
+          title="Recorded Videos"
+          items={liveItems}
+          loading={loading}
+          onItemClick={handleContentClick}
+        /> */}
 
       
         {/* Recommended Grid */}

@@ -4,12 +4,19 @@ import Image from 'next/image';
 import BunnyVideoPlayer from './BunnyVideoPlayer';
 import { StreamContent } from './TrendingRow';
 
+interface LiveStreamContent  {
+  playbackId: string;
+  id: string;
+  title: string;
+}
+
 interface ContentCardProps {
-  content: StreamContent;
+  content: StreamContent | LiveStreamContent;
   onClick: () => void;
 }
 
 export default function ContentCard({ content, onClick }: ContentCardProps) {
+
   return (
     <div 
       className="group/card cursor-pointer transition-transform duration-300 ease-out hover:scale-105"
@@ -26,7 +33,15 @@ export default function ContentCard({ content, onClick }: ContentCardProps) {
       {/* Thumbnail/Player Container */}
       <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-800 mb-3">
         {
-          (content.thumbnailUrl || content.thumbnail) ? (
+          content.playbackId ? (
+            <Image
+              src={`https://image.mux.com/${content.playbackId}/thumbnail.png?width=320&height=180&time=0`}
+              alt={`${content.title} - ${content.streamer}`}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 280px, 320px"
+            />
+          ) : (content.thumbnailUrl || content.thumbnail) ? (
             <Image
               src={(content.thumbnailUrl || content.thumbnail)!}
               alt={`${content.title} - ${content.streamer}`}
@@ -40,7 +55,7 @@ export default function ContentCard({ content, onClick }: ContentCardProps) {
         }
         
         {/* Live Badge */}
-        {content.isLive && (
+        {content.playbackId && (
           <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
             LIVE
           </div>
