@@ -1,16 +1,18 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { StreamContent } from './TrendingRow';
+import { LiveStreamContent, StreamContent } from './TrendingRow';
 import Image from 'next/image';
 import BunnyVideoPlayer from './BunnyVideoPlayer';
 import MuxVideoPlayer from './MuxVideoPlayer';
 
-interface LiveStreamContent  {
-  playbackId: string;
-  id: string;
-  title: string;
-}
+// interface LiveStreamContent  {
+//   playbackId: string;
+//   id: string;
+//   title: string;
+//   streamer: string;
+//   viewers?: number;
+// }
 
 interface ContentModalProps {
   isOpen: boolean;
@@ -106,7 +108,7 @@ console.log('ContentModal render - isOpen:', isOpen, 'content:', content);
             ):(<>
             
             </>)}
-          {content.bunnyConfig ? (
+          {'bunnyConfig' in content && content.bunnyConfig ? (
             <BunnyVideoPlayer
               config={content.bunnyConfig}
               autoPlay
@@ -118,7 +120,7 @@ console.log('ContentModal render - isOpen:', isOpen, 'content:', content);
           ) : (
             <>
               <Image
-                src={content.thumbnailUrl || content.thumbnail || '/window.svg'}
+                src={('thumbnailUrl' in content ? content.thumbnailUrl : null) || ('thumbnail' in content ? content.thumbnail : null) || '/window.svg'}
                 alt={content.title}
                 fill
                 className="object-cover"
@@ -158,9 +160,9 @@ console.log('ContentModal render - isOpen:', isOpen, 'content:', content);
                 {content.title}
               </h2>
               <div className="flex items-center gap-3 text-gray-400">
-                <span className="font-semibold text-purple-400">{content.streamer}</span>
+                <span className="font-semibold text-purple-400">{'streamer' in content ? content.streamer : 'Unknown Streamer'}</span>
                 <span>•</span>
-                {content.viewers &&(<span className="flex items-center gap-1">
+                {'viewers' in content && content.viewers && (<span className="flex items-center gap-1">
                   <span className="w-2 h-2 bg-red-500 rounded-full"></span>
                   {content.viewers} viewers
                 </span>)}
@@ -171,11 +173,11 @@ console.log('ContentModal render - isOpen:', isOpen, 'content:', content);
           {/* Game/Category */}
           <div className="mb-4">
             <p className="text-sm text-gray-500 mb-1">Category</p>
-            <p className="text-white font-medium">{content.game}</p>
+            <p className="text-white font-medium">{'game' in content ? content.game : 'Unknown Category'}</p>
           </div>
 
           {/* Tags */}
-          {content.tags && content.tags.length > 0 && (
+          {'tags' in content && content.tags && content.tags.length > 0 && (
             <div className="mb-6">
               <p className="text-sm text-gray-500 mb-2">Tags</p>
               <div className="flex flex-wrap gap-2">

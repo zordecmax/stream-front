@@ -16,10 +16,20 @@ export interface StreamContent {
   bunnyConfig?: BunnyVideoConfig;
 }
 
-interface TrendingRowProps {
+export interface LiveStreamContent  {
+  id: string;
+  playbackId: string;
+  title: string;
+  description: string;
+  status: 'active' | 'idle' | string;
+  playbackUrl: string; // m3u8 URL
+  createdAt: string;
+};
+
+export interface TrendingRowProps {
   title?: string;
-  items: StreamContent[] | null;
-  onItemClick: (item: StreamContent) => void;
+  items: StreamContent[] | LiveStreamContent[] | null;
+  onItemClick: (item: StreamContent | LiveStreamContent) => void;
   loading?: boolean;
 }
 
@@ -30,7 +40,7 @@ export default function TrendingRow({
   loading = false,
 }: TrendingRowProps) {
   const list = items ?? [];
-  console.log(list)
+
   return (
     <section className="mb-8 md:mb-12">
       <h2 className="text-2xl md:text-3xl font-bold mb-4 px-4 md:px-8 text-white">

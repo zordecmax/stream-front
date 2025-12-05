@@ -84,7 +84,7 @@ const mockStreams: StreamContent[] = [
 // const categories = [ /* unused in current view */ ];
 
 export default function Home() {
-  const [selectedContent, setSelectedContent] = useState<StreamContent | LiveStreamContent| null>(null);
+  const [selectedContent, setSelectedContent] = useState<StreamContent | LiveStreamContent | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data, loading, error } = useStreamingData({
@@ -166,12 +166,12 @@ export default function Home() {
           onItemClick={handleContentClick}
         />
        {/* Recorded Videos */}
-        {/* <TrendingRow 
+        <TrendingRow 
           title="Recorded Videos"
           items={liveItems}
           loading={loading}
           onItemClick={handleContentClick}
-        /> */}
+        />
 
       
         {/* Recommended Grid */}

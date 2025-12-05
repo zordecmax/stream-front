@@ -2,13 +2,17 @@
 
 import Image from 'next/image';
 import BunnyVideoPlayer from './BunnyVideoPlayer';
-import { StreamContent } from './TrendingRow';
+import { LiveStreamContent, StreamContent } from './TrendingRow';
 
-interface LiveStreamContent  {
-  playbackId: string;
-  id: string;
-  title: string;
-}
+// interface LiveStreamContent  {
+//   playbackId: string;
+//   id: string;
+//   title: string;
+//   streamer: string;
+//   viewers: number;
+//   game: string;
+//   tags?: string[];
+// }
 
 interface ContentCardProps {
   content: StreamContent | LiveStreamContent;
@@ -33,18 +37,18 @@ export default function ContentCard({ content, onClick }: ContentCardProps) {
       {/* Thumbnail/Player Container */}
       <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-800 mb-3">
         {
-          content.playbackId ? (
+          'playbackId' in content && content.playbackId ? (
             <Image
               src={`https://image.mux.com/${content.playbackId}/thumbnail.png?width=320&height=180&time=0`}
-              alt={`${content.title} - ${content.streamer}`}
+              alt={`${content.title}`}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 280px, 320px"
             />
-          ) : (content.thumbnailUrl || content.thumbnail) ? (
+          ) : ('thumbnailUrl' in content && content.thumbnailUrl) || ('thumbnail' in content && content.thumbnail) ? (
             <Image
-              src={(content.thumbnailUrl || content.thumbnail)!}
-              alt={`${content.title} - ${content.streamer}`}
+              src={('thumbnailUrl' in content ? content.thumbnailUrl : content.thumbnail)!}
+              alt={`${content.title} `}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 280px, 320px"
@@ -55,7 +59,7 @@ export default function ContentCard({ content, onClick }: ContentCardProps) {
         }
         
         {/* Live Badge */}
-        {content.playbackId && (
+        {'playbackId' in content && content.playbackId && (
           <div className="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
             LIVE
           </div>
@@ -64,7 +68,7 @@ export default function ContentCard({ content, onClick }: ContentCardProps) {
         {/* Viewers Count */}
         <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded flex items-center gap-1">
           <span className="w-2 h-2 bg-red-500 rounded-full"></span>
-          {content.viewers} viewers
+          {'viewers' in content ? content.viewers : 0} viewers
         </div>
         
         {/* Hover Overlay with Play Icon */}
@@ -88,14 +92,14 @@ export default function ContentCard({ content, onClick }: ContentCardProps) {
           {content.title}
         </h3>
         <p className="text-gray-400 text-sm">
-          {content.streamer}
+          {'streamer' in content ? content.streamer : 'Unknown Streamer'}
         </p>
         <p className="text-gray-500 text-xs">
-          {content.game}
+          {'game' in content ? content.game : 'Unknown Game'}
         </p>
         
         {/* Tags */}
-        {content.tags && content.tags.length > 0 && (
+        {'tags' in content && content.tags && content.tags.length > 0 && (
           <div className="flex flex-wrap gap-1 pt-1">
             {content.tags.slice(0, 2).map((tag, index) => (
               <span 
