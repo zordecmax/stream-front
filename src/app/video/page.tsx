@@ -1,6 +1,5 @@
 import { mockMessages } from "@/data/mockData";
 import StreamChat from "@/components/Chat/StreamChat";
-import MuxVideoPlayer from "@/components/MuxVideoPlayer";
 import Button from "@/components/Button";
 import Badge from "@/components/Badge";
 import { IconHeart, IconPointFilled } from '@tabler/icons-react';
@@ -16,7 +15,7 @@ export default function Video() {
 
           <iframe
             src="https://player.mux.com/rR8P8mSaKDzz02TsftugTUdI00cQPJX00oy?metadata-video-title=Test+Video&video-title=Test+Video"
-            style={{ width: "100%", border: "none", aspectRatio: "16/9" }}
+            className="w-full h-full border-0 aspect-video"
             allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
             allowFullScreen
           ></iframe>
@@ -44,7 +43,7 @@ export default function Video() {
           <p className="text-gray-300">
             Willkommen zu meinem Stream! Heute werden wir spannende Spiele spielen und viel Spaß haben. Vergesst nicht, den Kanal zu abonnieren und die Glocke zu aktivieren, um keine Streams zu verpassen!
           </p>
-          </div>
+        </div>
       </div>
 
       <StreamChat messages={mockMessages} />

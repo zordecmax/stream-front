@@ -3,14 +3,15 @@ import Button from './Button';
 
 interface VideoCardProps {
   title: string;
-  name: string;
+  channelName: string;
   viewers?: number;
   category: string;
   image: string;
+  avatar: string;
   game: string;
 }
 
-export default function VideoCard({ title, name, viewers, category, image, game }: VideoCardProps) {
+export default function VideoCard({ title, channelName, viewers, category, image, avatar, game }: VideoCardProps) {
   return (
     <div className="flex flex-col gap-2 w-80">
       <div className="relative">
@@ -22,10 +23,10 @@ export default function VideoCard({ title, name, viewers, category, image, game 
       </div>
 
       <div className='flex gap-3 items-center'>
-        <img src={image} alt={name} className='w-10 h-10 object-cover aspect-square rounded-full' />
+        <img src={avatar} alt={channelName} className='w-10 h-10 object-cover aspect-square rounded-full' />
         <div className='flex flex-col grow'>
           <h4 className='font-semibold'>{title}</h4>
-          <span className='font-medium text-secondary'>{name}</span>
+          <span className='font-medium text-secondary'>{channelName}</span>
         </div>
         <span className='font-medium text-muted'>{game}</span>
       </div>
