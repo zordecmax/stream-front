@@ -30,10 +30,10 @@ export default function RootLayout({
 
             <Header />
 
-            <div className="flex flex-col md:flex-row mt-19">
+            <div className="flex flex-col md:flex-row mt-20">
               <LiveStreamers streamers={mockStreamers} />
 
-              <main className="md:basis-3/4 grow p-6 space-y-6">
+              <main className="md:basis-3/4 grow p-4 space-y-6">
 
                 {children}
 

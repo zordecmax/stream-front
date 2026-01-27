@@ -10,7 +10,7 @@ interface StreamChatProps {
 
 export default function StreamChat({ messages }: StreamChatProps) {
   return (
-    <aside className="md:basis-96 p-4 space-y-8 flex flex-col justify-between">
+    <aside className="md:basis-96 p-4 space-y-8 flex flex-col justify-between sticky top-20 h-fit min-h-full overflow-y-auto max-h-[calc(100vh-5rem)]">
       <div className="flex justify-between items-center">
         <h3 className="text-lg md:text-xl font-bold text-white">
           Stream-Chat
@@ -18,7 +18,28 @@ export default function StreamChat({ messages }: StreamChatProps) {
         <IconArrowBarToRight className="w-6 h-6" />
       </div>
       
-      <div className="space-y-4 grow">
+      <div className="space-y-4 grow overflow-y-scroll h-full">
+        {messages.map((msg, index) => {
+          const colors = [
+            'text-red-400',
+            'text-green-400',
+            'text-lime-400',
+            'text-purple-400',
+            'text-orange-400',
+            'text-yellow-400',
+            'text-blue-400',
+          ];
+          const color = colors[index % colors.length];
+
+          return (
+            <Message
+              key={index}
+              name={msg.name}
+              message={msg.message}
+              color={color}
+            />
+          );
+        })}
         {messages.map((msg, index) => {
           const colors = [
             'text-red-400',
