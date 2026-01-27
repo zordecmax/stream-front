@@ -1,4 +1,5 @@
 import { ChatMessages } from '@/components/Chat/Message';
+import { StreamerItems } from '@/components/StreamerItem';
 
 export const mockStreamers: StreamerItems[] = [
   {

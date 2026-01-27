@@ -6,6 +6,12 @@ interface StreamerItemProps {
     isLive: boolean;
 }
 
+export interface StreamerItems {
+    name: string;
+    game: string;
+    viewers: number;
+}
+
 const StreamerItem: React.FC<StreamerItemProps> = ({
     avatar,
     name,
