@@ -19,7 +19,7 @@ export default function Badge({ children, variant = 'primary', size = 'md', clas
   };
   
   const variantStyles = {
-    primary: 'bg-[#09CAC8] text-white',
+    primary: 'bg-[#09CAC8]/40 text-white',
     secondary: 'bg-gray-800 text-gray-300',
     success: 'bg-green-600 text-white',
     danger: 'bg-red-600 text-white',
