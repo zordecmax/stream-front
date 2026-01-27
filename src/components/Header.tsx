@@ -27,7 +27,7 @@ export default function Header() {
           <div className="flex items-center justify-between gap-6">
             {/* Logo */}
             <Link href="/" className="flex items-center group">
-              <img src="images/logo.svg" alt="ZenithFlix Logo" className="h-8 w-auto" />
+              <img src="images/logo.svg" alt="HYPE Logo" className="h-8 w-auto" />
             </Link>
             <div className="flex items-center gap-8">
 

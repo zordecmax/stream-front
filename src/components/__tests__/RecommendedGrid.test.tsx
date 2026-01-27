@@ -6,7 +6,7 @@ function makeItem(id: string): StreamContent {
   return {
     id,
     title: `Title ${id}`,
-    streamer: 'ZenithFlix',
+    streamer: 'HYPE',
     viewers: '123',
     game: 'Test Game',
     thumbnailUrl: '/window.svg',

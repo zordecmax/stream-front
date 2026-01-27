@@ -25,15 +25,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased font-sans`}>
+      <body className={`${inter.variable} antialiased font-sans overflow-x-hidden`}>
         <AuthProvider>
 
             <Header />
 
-            <div className="flex flex-col md:flex-row mt-19">
+            <div className="flex flex-col md:flex-row mt-20">
               <LiveStreamers streamers={mockStreamers} />
 
-              <main className="md:basis-3/4 grow p-6 space-y-6">
+              <main className="md:basis-3/4 grow p-4 space-y-6 min-h-[calc(100vh-200px)]">
 
                 {children}
 

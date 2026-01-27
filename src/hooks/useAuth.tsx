@@ -18,8 +18,8 @@ type AuthContextValue = AuthState & {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
-const AUTH_STORAGE_KEY = 'zenithflix_auth_token';
-const AUTH_EMAIL_KEY = 'zenithflix_auth_email';
+const AUTH_STORAGE_KEY = 'HYPE_auth_token';
+const AUTH_EMAIL_KEY = 'HYPE_auth_email';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [accessToken, setAccessToken] = useState<string | null>(null);

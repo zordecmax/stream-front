@@ -15,11 +15,11 @@ export default function RecommendedGrid({ title = 'Recommended for You', items, 
 
   return (
     <section className="mb-8 md:mb-12">
-      <h2 className="text-2xl md:text-3xl font-bold mb-4 px-4 md:px-8 text-white">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4  text-white">
         {title}
       </h2>
 
-      <div className="px-4 md:px-8">
+      <div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {showSkeleton ? (
             Array.from({ length: 8 }).map((_, i) => (
