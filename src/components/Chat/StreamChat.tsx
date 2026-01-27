@@ -10,7 +10,7 @@ interface StreamChatProps {
 
 export default function StreamChat({ messages }: StreamChatProps) {
   return (
-    <aside className="md:basis-96 p-4 space-y-8 flex flex-col justify-between sticky top-20 h-fit min-h-full overflow-y-auto max-h-[calc(100vh-5rem)]">
+    <aside className="md:basis-96 p-4 pl-8 space-y-8 flex flex-col justify-between sticky top-20 h-fit min-h-full overflow-y-auto max-h-[calc(100vh-6rem)]">
       <div className="flex justify-between items-center">
         <h3 className="text-lg md:text-xl font-bold text-white">
           Stream-Chat

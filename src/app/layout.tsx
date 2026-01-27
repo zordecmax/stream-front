@@ -33,7 +33,7 @@ export default function RootLayout({
             <div className="flex flex-col md:flex-row mt-20">
               <LiveStreamers streamers={mockStreamers} />
 
-              <main className="md:basis-3/4 grow p-4 space-y-6">
+              <main className="md:basis-3/4 grow p-4 space-y-6 min-h-[calc(100vh-200px)]">
 
                 {children}
 

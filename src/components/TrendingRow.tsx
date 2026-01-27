@@ -43,13 +43,13 @@ export default function TrendingRow({
 
   return (
     <section className="mb-8 md:mb-12">
-      <h2 className="text-2xl md:text-3xl font-bold mb-4 px-4 md:px-8 text-white">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
         {title}
       </h2>
 
       {/* Horizontal Scroll Container */}
       <div className="relative group/row">
-        <div className="overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth snap-x snap-mandatory px-4 md:px-8">
+        <div className="overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth snap-x snap-mandatory">
           <div className="flex gap-4 pb-4">
             {loading ? (
               // Loading state: skeletons
