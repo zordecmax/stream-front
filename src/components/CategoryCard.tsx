@@ -1,18 +1,16 @@
-'use client';
-
 import Button from './Button';
 
 interface CategoryCardProps {
   title: string;
   viewers: number;
   category: string;
-  thumbnail: string;
+  image: string;
 }
 
-export default function CategoryCard({ title, viewers, category, thumbnail }: CategoryCardProps) {
+export default function CategoryCard({ title, viewers, category, image }: CategoryCardProps) {
   return (
     <div className="flex flex-col gap-2 relative">
-      <img src={thumbnail} alt={title} />
+      <img src={image} alt={title} />
       <Button size="sm" className="absolute top-2 right-2">
         {category}
       </Button>

@@ -4,6 +4,9 @@ import "./globals.css";
 import 'plyr/dist/plyr.css';
 import { AuthProvider } from '@/hooks/useAuth';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import LiveStreamers from '@/components/LiveStreamers';
+import { mockStreamers } from '@/data/mockData';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,7 +27,20 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} antialiased font-sans`}>
         <AuthProvider>
-          {children}
+
+            <Header />
+
+            <div className="flex flex-col md:flex-row mt-19">
+              <LiveStreamers streamers={mockStreamers} />
+
+              <main className="md:basis-3/4 grow p-6 space-y-6">
+
+                {children}
+
+              </main>
+
+            </div>
+            
           <Footer />
         </AuthProvider>
       </body>

@@ -135,7 +135,7 @@ export default function Header() {
                 </div>
               ) : (
                 <button onClick={() => setAuthOpen(true)} className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-gray-800 transition-colors" aria-label="Sign in">
-                  <img src="images/user-avatar.png" className="w-8 h-8 rounded-full" />
+                  <img src="images/user-avatar.png" className="w-8 h-8 rounded-full" alt='avatar' />
                   <span className="hidden md:inline text-white">rodiehlmagenta75x</span>
                 </button>
               )}

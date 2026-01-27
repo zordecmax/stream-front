@@ -10,7 +10,7 @@ interface StreamChatProps {
 
 export default function StreamChat({ messages }: StreamChatProps) {
   return (
-    <aside className="md:basis-75 p-4 space-y-8 flex flex-col justify-between">
+    <aside className="md:basis-96 p-4 space-y-8 flex flex-col justify-between">
       <div className="flex justify-between items-center">
         <h3 className="text-lg md:text-xl font-bold text-white">
           Stream-Chat
@@ -53,10 +53,10 @@ export default function StreamChat({ messages }: StreamChatProps) {
         </form>
 
         <div className="flex gap-2 justify-end">
-          <Button type="button" className=" " size="sm">
+          <Button type="button" size="sm" variant='secondary'>
             <IconSettings className="w-5 h-5" />
           </Button>
-          <Button type="button" className=" " size="sm">
+          <Button type="button" size="sm">
             Chat
           </Button>
         </div>

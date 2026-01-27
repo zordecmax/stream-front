@@ -1,268 +1,54 @@
-'use client';
-
-import { useMemo, useState } from 'react';
-import Header from '@/components/Header';
-import StreamerItem from '@/components/StreamerItem';
-import Image from 'next/image';
-import TrendingRow, { LiveStreamContent } from '@/components/TrendingRow';
-import RecommendedGrid from '@/components/RecommendedGrid';
-import ContentModal from '@/components/ContentModal';
-import { ChatMessages, Message } from '@/components/Chat/Message';
-import { StreamContent } from '@/components/TrendingRow';
-import { useStreamingData, StreamingItem } from '@/hooks/useStreamingData';
-import MuxVideoPlayer from '@/components/MuxVideoPlayer';
-import { useLiveStreamingData } from '@/hooks/useLiveStreamingData';
 import CategoryCard from '@/components/CategoryCard';
-import LiveStreamers from '@/components/LiveStreamers';
 
-// Mock data for demonstration
-// Fallback/mock data (currently unused)
-
-const mockMessages: ChatMessages[] = [
-
-  {
-    name: 'SturmWolf',
-    message: 'Telekom for the win'
-  },
-  {
-    name: 'LevelJunge',
-    message: 'Telekom best telco brand in the world'
-  },
-  {
-    name: 'BluePixel',
-    message: '#telekomisthebest '
-  },
-  {
-    name: 'Kiro77',
-    message: 'TelekomOnTop'
-  },
-  {
-    name: 'StreamBuddy',
-    message: '#telekomismyfav'
-  },
-  {
-    name: 'Schatten32',
-    message: 'Telekom nummer 1 im Netz'
-  },
-  {
-    name: 'Echouser',
-    message: 'Best network? telekom'
-  },
-  {
-    name: 'NeoSpectator',
-    message: 'Telekom ist die Beste'
-  },
-  {
-    name: 'Purplerain',
-    message: 'telekom sets the standart'
-  },
-  {
-    name: 'SturmWolf',
-    message: 'Telekom for the win'
-  },
-  {
-    name: 'LevelJunge',
-    message: 'Telekom best telco brand in the world'
-  },
-  {
-    name: 'BluePixel',
-    message: '#telekomisthebest '
-  },
-  {
-    name: 'Kiro77',
-    message: 'TelekomOnTop'
-  },
-  {
-    name: 'StreamBuddy',
-    message: '#telekomismyfav Telekom is the best network'
-  },
-  {
-    name: 'Schatten32',
-    message: 'Telekom nummer 1 im Netz'
-  },
-  {
-    name: 'Echouser',
-    message: 'Best network? telekom'
-  },
-  {
-    name: 'NeoSpectator',
-    message: 'Telekom ist die Beste'
-  }
-]
-
-const mockStreamers: StreamerItems[] = [
-  {
-    name: 'Amar',
-    viewers: 233.376,
-    game: 'Counter-Strike'
-  },
-  {
-    name: 'EliasN97',
-    viewers: 47.573,
-    game: 'Live Talk'
-  },
-  {
-    name: 'Rosemondy',
-    viewers: 6.375,
-    game: 'Apex Legends '
-  },
-  {
-    name: 'AbuGoku999',
-    viewers: 9.376,
-    game: 'Poker'
-  },
-  {
-    name: 'Trymacs',
-    viewers: 14.154,
-    game: 'Dota 2'
-  },
-  {
-    name: 'Rohat',
-    viewers: 17.928,
-    game: 'Live Talk'
-  },
-  {
-    name: 'RezonFN',
-    viewers: 8.329,
-    game: 'Fortnite'
-  },
-  {
-    name: 'BigSpinRoyale',
-    viewers: 4.217,
-    game: 'Clash Royale'
-  },
-  {
-    name: 'RevedTV',
-    viewers: 8.926,
-    game: 'Interact'
-  },
-  {
-    name: 'NoWay4uSir',
-    viewers: 16.251,
-    game: 'League of Legends'
-  },
-  {
-    name: 'Pietro Lombardi',
-    viewers: 2.836,
-    game: 'GTA 6'
-  },
-  {
-    name: 'xFibii',
-    viewers: 1.846,
-    game: 'Musik'
-  }
-];
-
-// const categories = [ /* unused in current view */ ];
-
-export default function Home() {
-  const [selectedContent, setSelectedContent] = useState<StreamContent | LiveStreamContent | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const { data, loading, error } = useStreamingData({
-    query: '',          // optional
-    genre: '',          // optional
-    refreshInterval: 0, // optional (ms); e.g., 60000 for 1 min
-  });
-
-  const { data: liveData, loading: liveLoading, error: liveError, refresh } = useLiveStreamingData({ refreshInterval: 30000 });
-
-
-
-  const CDN_HOSTNAME = 'vz-86921353-a1a.b-cdn.net';
-
-  const mapItemToContent = (item: StreamingItem): StreamContent => {
-    // Try to extract Bunny videoId from the embed URL if present
-    const match = item.videoUrl?.match(/embed\/(\d+)\/([a-f0-9\-]+)/i);
-    const videoId = match?.[2];
-
-    return {
-      id: item.id,
-      title: item.title,
-      streamer: 'ZenithFlix',
-      viewers: `${item.rating} ⭐`,
-      game: item.genre,
-      thumbnail: item.thumbnailUrl,
-      tags: item.cast?.slice(0, 3) ?? [],
-      isLive: true,
-      bunnyConfig: {
-        cdnHostname: CDN_HOSTNAME,
-        videoId: videoId ?? undefined,
-      },
-    };
-  };
-
-  const liveItems: StreamContent[] = useMemo(() => {
-    if (!data || data.length === 0) return [];
-    return data.map(mapItemToContent);
-  }, [data]);
-
-  const handleContentClick = (content: StreamContent | LiveStreamContent) => {
-    setSelectedContent(content);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => setSelectedContent(null), 200);
-  };
+export default function Categores() {
 
   return (
-    <div className=" bg-gray-900">
-      <Header />
+    <>
+      <h1 className='text-3xl font-bold'>Kategorien</h1>
 
-      <div className="flex flex-col md:flex-row mt-19">
-        <LiveStreamers streamers={mockStreamers} />
+      <div className="flex gap-5">
+        <CategoryCard
+          title="Grand Theft Auto"
+          viewers={128404}
+          category="IRL"
+          image="images/thumbnails/01.png"
+        />
 
-        <main className="md:basis-3/4 grow p-6 space-y-6">
-          <h1 className='text-3xl font-bold'>Kategorien</h1>
+        <CategoryCard
+          title="IRL"
+          viewers={89404}
+          category="Abenteuer"
+          image="images/thumbnails/02.png"
+        />
 
-          <div className="flex gap-5">
-            <CategoryCard
-              title="Grand Theft Auto"
-              viewers={128404}
-              category="IRL"
-              thumbnail="images/thumbnails/01.png"
-            />
+        <CategoryCard
+          title="EAFC"
+          viewers={18948}
+          category="Action"
+          image="images/thumbnails/03.png"
+        />
 
-            <CategoryCard
-              title="IRL"
-              viewers={89404}
-              category="Abenteuer"
-              thumbnail="images/thumbnails/02.png"
-            />
+        <CategoryCard
+          title="Sport"
+          viewers={1804}
+          category="Abenteuer"
+          image="images/thumbnails/04.png"
+        />
 
-            <CategoryCard
-              title="EAFC"
-              viewers={18948}
-              category="Action"
-              thumbnail="images/thumbnails/03.png"
-            />
+        <CategoryCard
+          title="Fortnite"
+          viewers={39441}
+          category="Action"
+          image="images/thumbnails/05.png"
+        />
 
-            <CategoryCard
-              title="Sport"
-              viewers={1804}
-              category="Abenteuer"
-              thumbnail="images/thumbnails/04.png"
-            />
-
-            <CategoryCard
-              title="Fortnite"
-              viewers={39441}
-              category="Action"
-              thumbnail="images/thumbnails/05.png"
-            />
-
-            <CategoryCard
-              title="Interaktion"
-              viewers={39441}
-              category="Action"
-              thumbnail="images/thumbnails/06.png"
-            />
-          </div>
-        </main>
+        <CategoryCard
+          title="Interaktion"
+          viewers={39441}
+          category="Action"
+          image="images/thumbnails/06.png"
+        />
       </div>
-
-    </div>
+    </>
   );
 }
