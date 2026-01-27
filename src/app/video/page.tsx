@@ -30,8 +30,8 @@ export default function Video() {
             <span className='font-medium text-secondary'>Telekom is the best network</span>
 
           </div>
-          <Button variant="secondary" className=""><IconHeart /></Button>
-          <Button variant="primary" className="">Abonnieren</Button>
+          <Button variant="secondary"><IconHeart /></Button>
+          <Button variant="primary">Abonnieren</Button>
         </div>
         <div className="flex gap-2 -mt-2 ms-20">
           <Badge variant="primary" className="w-fit">Unterhaltung</Badge>
