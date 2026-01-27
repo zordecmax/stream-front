@@ -10,7 +10,7 @@ interface CategoryCardProps {
 export default function CategoryCard({ title, viewers, category, image }: CategoryCardProps) {
   return (
     <div className="flex flex-col gap-2 relative">
-      <img src={image} alt={title} />
+      <img src={image} alt={title} className='min-w-44' />
       <Button size="sm" className="absolute top-2 right-2">
         {category}
       </Button>

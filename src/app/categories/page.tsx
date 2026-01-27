@@ -6,7 +6,7 @@ export default function Categores() {
     <>
       <h1 className='text-3xl font-bold'>Kategorien</h1>
 
-      <div className="flex gap-5">
+      <div className="flex gap-5 flex-wrap w-fit overflow-x-scroll">
         <CategoryCard
           title="Grand Theft Auto"
           viewers={128404}
@@ -52,7 +52,7 @@ export default function Categores() {
 
         <h2 className='text-3xl font-bold mt-8'>Für dich empfohlen</h2>
 
-        <div className="flex gap-5">
+        <div className="flex gap-5 flex-wrap w-fit overflow-x-scroll">
           <CategoryCard
             title="Grand Theft Auto"
             category="IRL"

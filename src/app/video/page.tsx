@@ -8,7 +8,7 @@ import { IconHeart, IconPointFilled } from '@tabler/icons-react';
 export default function Video() {
 
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row gap-8">
       <div className="md:basis-3/4 grow space-y-6">
 
         {/* video */}

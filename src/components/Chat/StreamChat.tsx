@@ -10,12 +10,12 @@ interface StreamChatProps {
 
 export default function StreamChat({ messages }: StreamChatProps) {
   return (
-    <aside className="md:basis-96 p-4 pl-8 space-y-8 flex flex-col justify-between sticky top-20 h-fit min-h-full overflow-y-auto max-h-[calc(100vh-6rem)]">
+    <aside className=" md:basis-96 md:space-y-8 space-y-4 flex flex-col justify-between md:sticky top-20 h-fit min-h-full overflow-y-auto max-h-[calc(100vh-6rem)]">
       <div className="flex justify-between items-center">
         <h3 className="text-lg md:text-xl font-bold text-white">
           Stream-Chat
         </h3>
-        <IconArrowBarToRight className="w-6 h-6" />
+        <IconArrowBarToRight className="w-6 h-6 hidden md:block" />
       </div>
       
       <div className="space-y-4 grow overflow-y-scroll h-full">

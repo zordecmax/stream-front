@@ -10,7 +10,7 @@ export default function Streams() {
       </div>
       <h1 className='text-3xl font-bold'>Live streams</h1>
 
-      <div className="flex gap-5">
+      <div className="flex gap-5 flex-wrap">
         <VideoCard
           title="My first stream"
           name="EliasN97"
