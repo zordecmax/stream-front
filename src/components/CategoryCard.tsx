@@ -2,7 +2,7 @@ import Button from './Button';
 
 interface CategoryCardProps {
   title: string;
-  viewers: number;
+  viewers?: number;
   category: string;
   image: string;
 }
@@ -16,9 +16,11 @@ export default function CategoryCard({ title, viewers, category, image }: Catego
       </Button>
       <div>
         <h3 className="font-semibold">{title}</h3>
-        <span className="text-sm text-secondary">
-          Zuschauer - {viewers.toLocaleString('de-DE')}
-        </span>
+        {viewers != null && (
+          <span className="text-sm text-secondary">
+            Zuschauer - {viewers.toLocaleString('de-DE')}
+          </span>
+        )}
       </div>
     </div>
   );

@@ -50,48 +50,41 @@ export default function Categores() {
         />
       </div>
 
-        <h2 className='text-3xl font-bold'>Für dich empfohlen</h2>
+        <h2 className='text-3xl font-bold mt-8'>Für dich empfohlen</h2>
 
         <div className="flex gap-5">
           <CategoryCard
             title="Grand Theft Auto"
-            viewers={128404}
             category="IRL"
             image="images/vertical/01.png"
           />
           <CategoryCard
             title="Grand Theft Auto"
-            viewers={128404}
             category="IRL"
             image="images/vertical/02.png"
           />
           <CategoryCard
             title="Grand Theft Auto"
-            viewers={128404}
             category="IRL"
             image="images/vertical/03.png"
           />
           <CategoryCard
             title="Grand Theft Auto"
-            viewers={128404}
             category="IRL"
             image="images/vertical/04.png"
           />
           <CategoryCard
             title="Grand Theft Auto"
-            viewers={128404}
             category="IRL"
             image="images/vertical/05.png"
           />
           <CategoryCard
             title="Grand Theft Auto"
-            viewers={128404}
             category="IRL"
             image="images/vertical/06.png"
           />
           <CategoryCard
             title="Grand Theft Auto"
-            viewers={128404}
             category="IRL"
             image="images/vertical/07.png"
           />
