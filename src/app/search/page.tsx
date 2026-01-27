@@ -55,7 +55,7 @@ export default function SearchPage() {
     return {
       id: item.id,
       title: item.title,
-      streamer: 'ZenithFlix',
+      streamer: 'HYPE',
       viewers: `${item.rating} ⭐`,
       game: item.genre,
       thumbnailUrl: item.thumbnailUrl,
