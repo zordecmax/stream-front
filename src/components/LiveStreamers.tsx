@@ -17,9 +17,9 @@ interface LiveStreamersProps {
 export default function LiveStreamers({ streamers }: LiveStreamersProps) {
     const { toggleLeftSidebar, leftSidebarCollapsed } = useLayout();
     return (
-        <aside className="
+        <aside className={`
         fixed h-[calc(100vh-var(--navbar-height))] left-0 p-4 space-y-8 top-[var(--navbar-height)] w-[var(--sidebar-width-left)] overflow-y-auto scroll-macos
-">
+        `}>
             <div className="flex flex-col gap-6 overflow-y-auto scroll-macos">
                 <div className={`flex items-center
                     ${leftSidebarCollapsed ? "justify-center" : "justify-between"}

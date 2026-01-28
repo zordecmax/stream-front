@@ -10,12 +10,18 @@ interface StreamChatProps {
 }
 
 export default function StreamChat({ messages }: StreamChatProps) {
-  const { rightSidebarCollapsed, toggleRightSidebar } = useLayout();
+  const { rightSidebarCollapsed, toggleRightSidebar, isMobile } = useLayout();
   return (
     <>
-      <Button variant="secondary" className={` 
-        ${rightSidebarCollapsed ? "fixed top-[var(--navbar-height)] mt-2  right-4" : "!hidden"}`} 
-        onClick={toggleRightSidebar}>
+      <Button
+        variant="secondary"
+        className={` 
+          ${rightSidebarCollapsed ? "fixed top-[var(--navbar-height)] mt-2  right-4" : "!hidden"}
+          ${isMobile && "!hidden"}
+        `}
+        onClick={toggleRightSidebar}
+        disabled={isMobile}
+      >
         <IconArrowBarToRight className="w-6 h-6 rotate-180" />
         <span className='ms-2'>Chat</span>
       </Button>
@@ -29,6 +35,7 @@ export default function StreamChat({ messages }: StreamChatProps) {
         max-h-[calc(100dvh-var(--navbar-height))]
         w-[var(--sidebar-width-right)]
         overflow-y-auto p-4
+        ${isMobile ? "relative w-full max-h-auto" : ""}
       `}
       >
         <div className="flex flex-col justify-between gap-6 overflow-y-auto scroll-macos">
@@ -37,10 +44,14 @@ export default function StreamChat({ messages }: StreamChatProps) {
             <h3 className="text-lg md:text-xl font-bold text-white">
               Stream-Chat
             </h3>
-            <IconArrowBarToRight className="w-6 h-6 hidden md:block cursor-pointer" onClick={() => toggleRightSidebar()} />
-
+            <button
+              onClick={() => toggleRightSidebar()}
+              disabled={isMobile}
+              className={`w-6 h-6 hidden lg:block cursor-pointer`}
+            >
+              <IconArrowBarToRight className="w-6 h-6" />
+            </button>
           </div>
-
 
           <div className="space-y-4 grow overflow-y-auto scroll-macos">
 
