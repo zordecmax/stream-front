@@ -14,5 +14,5 @@ export const Message: React.FC<MessageItemProps> = ({
     message,
     color,
 }) => (
-    <div className='font-extrabold text-sm'><span className={color}>{name}</span>: {message}</div>
+    <div className='font-semibold text-sm'><span className={`${color} font-extrabold`}>{name}</span>: {message}</div>
 );

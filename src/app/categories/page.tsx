@@ -6,7 +6,7 @@ export default function Categories() {
     <>
       <h1 className='text-3xl font-bold'>Kategorien</h1>
 
-      <div className="flex gap-5 w-full overflow-x-auto min-w-0 scrollbar-macos">
+      <div className="flex gap-5 w-full overflow-x-auto min-w-0 scroll-macos">
         <CategoryCard
           title="Grand Theft Auto"
           viewers={128404}
@@ -59,7 +59,7 @@ export default function Categories() {
 
       <h2 className='text-3xl font-bold mt-8'>Für dich empfohlen</h2>
 
-      <div className="flex gap-5 w-full overflow-x-auto min-w-0 scrollbar-macos">
+      <div className="flex gap-5 w-full overflow-x-auto min-w-0 scroll-macos">
         <CategoryCard
           title="DiE GRÖSSTE SPENDE ALLER ZEITEN!"
           image="images/vertical/01.png"

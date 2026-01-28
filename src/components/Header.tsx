@@ -28,7 +28,7 @@ export default function Header() {
           <div className="flex items-center justify-between md:gap-4 gap-2">
             {/* Logo */}
             <Link href="/" className="flex items-center group">
-              <img src="images/logo.svg" alt="HYPE Logo" className="h-auto w-30 min-w-20" />
+              <img src="/images/logo.svg" alt="HYPE Logo" className="h-auto w-30 min-w-20" />
             </Link>
             <div className="flex items-center gap-8">
 
@@ -67,16 +67,20 @@ export default function Header() {
               </button>
 
               {/* Notifications */}
-              <button
-                className="relative p-2 text-gray-400 hover:text-white transition-colors"
-                aria-label="Notifications"
-              >
-                <IconBell className="w-6 h-6" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-              </button>
+              {userEmail && (
+                <button
+                  className="relative p-2 text-gray-400 hover:text-white transition-colors"
+                  aria-label="Notifications"
+                >
+                  <IconBell className="w-6 h-6" />
+                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+              )}
+
               {/* User/Profile or Sign in */}
               {userEmail ? (
                 <div className="relative">
+
                   {/* Profile button with partial email */}
                   <button
                     type="button"
@@ -88,6 +92,7 @@ export default function Header() {
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm">
                       {userEmail.charAt(0).toUpperCase()}
                     </div>
+                    <span className='hidden lg:inline'>{userEmail.replace(/(.{3}).+(@.+)/, '$1…$2')}</span>
                     <IconChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${profileOpen ? 'rotate-180' : ''}`} />
                   </button>
 
@@ -95,7 +100,7 @@ export default function Header() {
                   {profileOpen && (
                     <div className="absolute right-0 mt-2 w-56 rounded-lg border border-gray-800 bg-gray-900 shadow-lg z-50">
                       <div className="py-2">
-                        <div className="w-full text-left px-3 py-2 text-sm text-white hover:bg-gray-800">
+                        <div className="w-full text-left px-3 py-2 text-sm text-white hover:bg-gray-800 block lg:hidden">
                           {userEmail.replace(/(.{3}).+(@.+)/, '$1…$2')}
                         </div>
                         <Link href="/live/create" className="block px-3 py-2 text-sm text-white hover:bg-gray-800" onClick={() => setProfileOpen(false)}>
@@ -115,18 +120,11 @@ export default function Header() {
                   )}
                 </div>
               ) : (
-                <button onClick={() => setAuthOpen(true)} className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-gray-800 transition-colors" aria-label="Sign in">
-                  <img src="images/user-avatar.png" className="w-8 min-w-8 h-8 rounded-full" alt='avatar' />
-                  <span className="hidden lg:inline text-white">rodiehlmagenta75x</span>
-                </button>
-              )}
 
-              {/* Sign Up Button
-              {!userEmail && (
-                <button onClick={() => setAuthOpen(true)} className="hidden lg:block bg-purple-600 hover:bg-purple-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors">
+                <button onClick={() => setAuthOpen(true)} className="bg-purple-600 hover:bg-purple-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors">
                   Sign Up
                 </button>
-              )} */}
+              )}
 
               {/* Mobile Menu */}
               <button
@@ -154,7 +152,7 @@ export default function Header() {
                 <NavItem href="/streams" label="Abonniert" onClick={() => setMobileOpen(false)} />
                 <NavItem href="/categories" label="Kategorien" onClick={() => setMobileOpen(false)} />
                 <NavItem href="#" label="VOD" onClick={() => setMobileOpen(false)} />
-                
+
                 {userEmail && (
                   <>
                     <NavItem href="/live-streams/my" onClick={() => setMobileOpen(false)} label='My Live Streams' />

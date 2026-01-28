@@ -1,17 +1,27 @@
+"use client";
+
+import { useEffect } from "react";
 import { mockMessages } from "@/data/mockData";
 import StreamChat from "@/components/Chat/StreamChat";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 import { IconHeart, IconPointFilled } from '@tabler/icons-react';
+import { useLayout } from "@/context/LayoutContext";
 
 export default function Video() {
+  const { setRightSidebarEnabled } = useLayout();
+
+  useEffect(() => {
+    setRightSidebarEnabled(true);
+    return () => setRightSidebarEnabled(false);
+  }, [setRightSidebarEnabled]);
 
   return (
-    <div className="flex flex-col md:flex-row gap-8">
+    <div className="flex flex-col md:flex-row gap-8 relative  md:h-dvh overflow-y-auto scroll-macos">
       <div className="md:basis-3/4 grow space-y-6">
 
         {/* video */}
-        <div className="relative aspect-video bg-black rounded-lg overflow-hidden">
+        <div className="relative aspect-video bg-black rounded-lg">
 
           <iframe
             src="https://player.mux.com/rR8P8mSaKDzz02TsftugTUdI00cQPJX00oy?metadata-video-title=Test+Video&video-title=Test+Video"
@@ -43,6 +53,28 @@ export default function Video() {
           <p className="text-gray-300">
             Willkommen zu meinem Stream! Heute werden wir spannende Spiele spielen und viel Spaß haben. Vergesst nicht, den Kanal zu abonnieren und die Glocke zu aktivieren, um keine Streams zu verpassen!
           </p>
+          <p className="text-gray-300">
+            Willkommen zu meinem Stream! Heute werden wir spannende Spiele spielen und viel Spaß haben. Vergesst nicht, den Kanal zu abonnieren und die Glocke zu aktivieren, um keine Streams zu verpassen!
+          </p>
+          <p className="text-gray-300">
+            Willkommen zu meinem Stream! Heute werden wir spannende Spiele spielen und viel Spaß haben. Vergesst nicht, den Kanal zu abonnieren und die Glocke zu aktivieren, um keine Streams zu verpassen!
+          </p>
+          <p className="text-gray-300">
+            Willkommen zu meinem Stream! Heute werden wir spannende Spiele spielen und viel Spaß haben. Vergesst nicht, den Kanal zu abonnieren und die Glocke zu aktivieren, um keine Streams zu verpassen!
+          </p>
+          <p className="text-gray-300">
+            Willkommen zu meinem Stream! Heute werden wir spannende Spiele spielen und viel Spaß haben. Vergesst nicht, den Kanal zu abonnieren und die Glocke zu aktivieren, um keine Streams zu verpassen!
+          </p>
+          <p className="text-gray-300">
+            Willkommen zu meinem Stream! Heute werden wir spannende Spiele spielen und viel Spaß haben. Vergesst nicht, den Kanal zu abonnieren und die Glocke zu aktivieren, um keine Streams zu verpassen!
+          </p>
+          <p className="text-gray-300">
+            Willkommen zu meinem Stream! Heute werden wir spannende Spiele spielen und viel Spaß haben. Vergesst nicht, den Kanal zu abonnieren und die Glocke zu aktivieren, um keine Streams zu verpassen!
+          </p>
+          <p className="text-gray-300">
+            Willkommen zu meinem Stream! Heute werden wir spannende Spiele spielen und viel Spaß haben. Vergesst nicht, den Kanal zu abonnieren und die Glocke zu aktivieren, um keine Streams zu verpassen!
+          </p>
+
         </div>
       </div>
 

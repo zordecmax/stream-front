@@ -7,10 +7,11 @@
 
     --navbar-height: 77px;
     
-    --sidebar-expanded-width: 256px;
+    --sidebar-width-left: 300px;
+    --sidebar-width-right: 300px;
+    --sidebar-expanded-width: 300px;
     --sidebar-collapsed-width: 56px;
     --embedded-expanded-player-left: 272px;
-    --embedded-collapsed-player-left: 80px;
     --chat-width: 340px;
     --chat-expanded: 1;
 }
@@ -44,30 +45,30 @@ body {
 }
 
 /* scrollbar macOS-like */
-.scrollbar-macos::-webkit-scrollbar {
+.scroll-macos::-webkit-scrollbar {
   height: 6px; /* pentru horizontal */
 }
 
-.scrollbar-macos::-webkit-scrollbar-track {
+.scroll-macos::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.scrollbar-macos::-webkit-scrollbar-thumb {
+.scroll-macos::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.35);
   border-radius: 9999px;
 }
 
-.scrollbar-macos::-webkit-scrollbar-thumb:hover {
+.scroll-macos::-webkit-scrollbar-thumb:hover {
   background-color: rgba(255, 255, 255, 0.55);
 }
-.scrollbar-macos {
+.scroll-macos {
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.35) transparent;
 }
-.scrollbar-macos::-webkit-scrollbar-thumb {
+.scroll-macos::-webkit-scrollbar-thumb {
   opacity: 0;
 }
 
-.scrollbar-macos:hover::-webkit-scrollbar-thumb {
+.scroll-macos:hover::-webkit-scrollbar-thumb {
   opacity: 1;
 }

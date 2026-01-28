@@ -10,7 +10,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ({ children, className = "", variant = "primary", size = "md", disabled, ...props }, ref) => {
         const baseStyles =
-            "inline-flex items-center justify-center rounded-full font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 ";
+            "inline-flex items-center justify-center rounded-full font-semibold transition-all ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ";
 
         const sizeStyles = {
             sm: "px-4 py-1.5 text-xs",
