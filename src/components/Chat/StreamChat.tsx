@@ -18,7 +18,7 @@ export default function StreamChat({ messages }: StreamChatProps) {
         <IconArrowBarToRight className="w-6 h-6 hidden md:block" />
       </div>
       
-      <div className="space-y-4 grow overflow-y-scroll h-full">
+      <div className="space-y-4 grow overflow-y-auto h-full">
         {messages.map((msg, index) => {
           const colors = [
             'text-red-400',
