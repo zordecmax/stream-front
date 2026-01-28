@@ -1,7 +1,7 @@
 import { mockMessages } from "@/data/mockData";
 import StreamChat from "@/components/Chat/StreamChat";
-import Button from "@/components/Button";
-import Badge from "@/components/Badge";
+import Button from "@/components/ui/Button";
+import Badge from "@/components/ui/Badge";
 import { IconHeart, IconPointFilled } from '@tabler/icons-react';
 
 export default function Video() {

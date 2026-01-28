@@ -4,6 +4,14 @@
 :root {
     --background: #101827;
     --foreground: #ffffff;
+
+    --navbar-height: 60px;
+    --sidebar-expanded-width: 256px;
+    --sidebar-collapsed-width: 56px;
+    --embedded-expanded-player-left: 272px;
+    --embedded-collapsed-player-left: 80px;
+    --chat-width: 340px;
+    --chat-expanded: 1;
 }
 
 /* Removed unsupported @theme rule to avoid CSS parse errors */
@@ -32,4 +40,33 @@ body {
   --color-success: rgba(74 222 128);
   --color-warning: rgba(251 191 36);
   --color-danger: rgba(248 113 113);
+}
+
+/* scrollbar macOS-like */
+.scrollbar-macos::-webkit-scrollbar {
+  height: 6px; /* pentru horizontal */
+}
+
+.scrollbar-macos::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-macos::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 9999px;
+}
+
+.scrollbar-macos::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+.scrollbar-macos {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.35) transparent;
+}
+.scrollbar-macos::-webkit-scrollbar-thumb {
+  opacity: 0;
+}
+
+.scrollbar-macos:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
 }

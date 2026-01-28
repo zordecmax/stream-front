@@ -1,7 +1,7 @@
 'use client';
 
 import { IconSend2, IconSettings, IconArrowBarToRight } from '@tabler/icons-react';
-import Button from '../Button';
+import Button from '../ui/Button';
 import { Message, ChatMessages } from './Message';
 
 interface StreamChatProps {

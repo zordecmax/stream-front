@@ -1,5 +1,5 @@
-import Badge from "@/components/Badge";
-import Button from './Button';
+import Badge from "@/components/ui/Badge";
+import Button from './ui/Button';
 
 interface VideoCardProps {
   title: string;
