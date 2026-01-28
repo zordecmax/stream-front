@@ -15,7 +15,7 @@ interface LiveStreamersProps {
 
 export default function LiveStreamers({ streamers }: LiveStreamersProps) {
     return (
-        <aside className="md:basis-75 p-4 space-y-8 order-1 md:order-0 md:sticky top-20 h-fit">
+        <aside className="md:basis-75 p-4 space-y-8 order-1 md:order-0 md:sticky h-full">
             <div className="flex justify-between items-center">
                 <h3 className="text-lg md:text-xl font-bold text-white">
                     Jetzt live
