@@ -41,7 +41,6 @@ export default function Header() {
                 <NavItem href="/video" label="Durchsuchen" active />
                 <NavItem href="/streams" label="Abonniert" />
                 <NavItem href="/categories" label="Kategorien" />
-                <NavItem href="#" label="VOD" />
               </nav>
             </div>
 
@@ -148,7 +147,6 @@ export default function Header() {
                 <NavItem href="/video" label="Durchsuchen" active onClick={() => setMobileOpen(false)} />
                 <NavItem href="/streams" label="Abonniert" onClick={() => setMobileOpen(false)} />
                 <NavItem href="/categories" label="Kategorien" onClick={() => setMobileOpen(false)} />
-                <NavItem href="#" label="VOD" onClick={() => setMobileOpen(false)} />
 
                 {userEmail && (
                   <>
