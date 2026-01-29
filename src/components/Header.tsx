@@ -23,7 +23,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 bg-gray-900/95 backdrop-blur-md h-(--navbar-height) flex flex-col justify-center">
+      <header className="fixed top-0 left-0 right-0 z-40 bg-gray-900/95 backdrop-blur-md h-[var(--navbar-height)] flex flex-col justify-center">
         <div className="mx-auto px-4 w-full">
           <div className="flex items-center justify-between md:gap-4 gap-2">
             {/* Logo */}
