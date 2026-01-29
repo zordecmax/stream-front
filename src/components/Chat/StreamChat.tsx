@@ -17,7 +17,7 @@ export default function StreamChat({ messages }: StreamChatProps) {
         variant="secondary"
         className={` 
           ${rightSidebarCollapsed ? "fixed top-[var(--navbar-height)] mt-2  right-4" : "!hidden"}
-          ${isMobile && "!hidden"}
+          ${isMobile ? "!hidden" : ""}
         `}
         onClick={toggleRightSidebar}
         disabled={isMobile}
