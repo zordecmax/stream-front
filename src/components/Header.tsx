@@ -17,7 +17,7 @@ export default function Header() {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const { userEmail, logout } = useAuth();
 
-  // Read query from URL on client without useSearchParams to avoid SSR Suspense requirement
+  // Initialize searchQuery from the current URL on the client
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const q = new URLSearchParams(window.location.search).get('q') || '';
