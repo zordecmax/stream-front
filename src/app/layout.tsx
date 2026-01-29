@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import LiveStreamers from '@/components/LiveStreamers';
 import { mockStreamers } from '@/data/mockData';
+import { LayoutProvider } from '@/context/LayoutContext'
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,23 +26,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased font-sans overflow-x-hidden`}>
+      <body
+        className={`${inter.variable} antialiased font-sans`}>
         <AuthProvider>
+          <LayoutProvider>
 
             <Header />
 
-            <div className="flex flex-col md:flex-row mt-20">
-              <LiveStreamers streamers={mockStreamers} />
+            <LiveStreamers streamers={mockStreamers} />
 
-              <main className="md:basis-3/4 grow p-4 space-y-6 min-h-[calc(100vh-200px)]">
+            <main className=" p-4 space-y-6 min-h-screen ml-[var(--sidebar-width-left)] mr-[var(--sidebar-width-right)] transition-[padding,margin] duration-300 ease-in-out mt-[var(--navbar-height)]">
+              {children}
+            </main>
 
-                {children}
-
-              </main>
-
-            </div>
-            
-          <Footer />
+            <Footer />
+          </LayoutProvider>
         </AuthProvider>
       </body>
     </html>

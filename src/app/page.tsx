@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Header from '@/components/Header';
 import Image from 'next/image';
 import TrendingRow, { LiveStreamContent } from '@/components/TrendingRow';
 import RecommendedGrid from '@/components/RecommendedGrid';
@@ -156,12 +155,12 @@ export default function Home() {
       </section>
 
       {/* Live Channels */}
-      <TrendingRow
+      {/* <TrendingRow
         title="Live streams"
         items={liveData}
         loading={liveLoading}
         onItemClick={handleContentClick}
-      />
+      /> */}
       {/* Recorded Videos */}
       <TrendingRow
         title="Recorded Videos"

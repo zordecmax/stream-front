@@ -2,6 +2,7 @@
 
 import ContentCard from './ContentCard';
 import type { BunnyVideoConfig } from './BunnyVideoPlayer';
+import { IconSearch } from '@tabler/icons-react';
 
 export interface StreamContent {
   id: string;
@@ -69,9 +70,7 @@ export default function TrendingRow({
               // Empty state: no data
               <div className="flex items-center justify-center w-full py-8">
                 <div className="text-center text-gray-400">
-                  <svg className="w-12 h-12 mx-auto mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
+                  <IconSearch className="w-12 h-12 mx-auto mb-3" />
                   <p>No items available</p>
                 </div>
               </div>

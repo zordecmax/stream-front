@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { IconX } from '@tabler/icons-react';
 
 type Mode = 'login' | 'register';
 
@@ -58,7 +59,7 @@ export default function AuthModal({ isOpen, onClose }: { isOpen: boolean; onClos
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" role="dialog" aria-modal="true" aria-labelledby="auth-title">
       <div className="relative w-full max-w-md bg-gray-900 text-white rounded-lg shadow-xl">
         <button ref={closeRef} onClick={onClose} className="absolute top-3 right-3 w-9 h-9 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center" aria-label="Close">
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/></svg>
+          <IconX className="w-5 h-5" />
         </button>
 
         <div className="px-6 pt-6">

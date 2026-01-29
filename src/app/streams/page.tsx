@@ -1,5 +1,5 @@
 import VideoCard from '@/components/VideoCard';
-import Badge from "@/components/Badge";
+import Badge from "@/components/ui/Badge";
 
 export default function Streams() {
   return (
