@@ -3,7 +3,7 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-    variant?: "primary" | "secondary";
+    variant?: "primary" | "secondary" | "transparent";
     size?: "sm" | "md" | "lg";
 };
 
@@ -21,6 +21,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         const variantStyles =
             variant === "secondary"
                 ? "bg-gray-700 text-white hover:bg-gray-600 focus:ring-gray-500 focus:ring-offset-gray-900 disabled:bg-gray-800"
+                : variant === "transparent"
+                ? "bg-transparent text-white hover:bg-white/10 focus:ring-white focus:ring-offset-gray-900 disabled:opacity-50"
                 : "bg-gradient-to-b from-[#09CAC8] to-[#005099] text-white hover:opacity-90 focus:ring-[#09CAC8] focus:ring-offset-gray-900 disabled:opacity-50";
 
         const disabledStyles = disabled ? " cursor-not-allowed" : " cursor-pointer";

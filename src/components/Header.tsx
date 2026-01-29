@@ -6,12 +6,14 @@ import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 import NavItem from './NavItem';
 import { IconBell, IconSearch, IconMenu2, IconChevronDown } from '@tabler/icons-react';
-
+import SearchForm from './SearchForm';
+import Button from './ui/Button';
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [authOpen, setAuthOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const { userEmail, logout } = useAuth();
   // Read query from URL on client without useSearchParams to avoid SSR Suspense requirement
   useEffect(() => {
@@ -43,23 +45,14 @@ export default function Header() {
 
             {/* Search Bar */}
             <div className="flex-1 max-w-md hidden sm:block">
-              <form className="relative" action="/search" method="GET">
-                <input
-                  type="text"
-                  name="q"
-                  placeholder="Streams, Spiele oder Nutzer suchen"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-gray-800 text-white placeholder-gray-500 px-4 py-2 pl-10 rounded-lg border border-gray-700 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all"
-                />
-                <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-              </form>
+              <SearchForm />
             </div>
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-3">
               {/* Search Icon - Mobile */}
               <button
+                onClick={() => setMobileSearchOpen(true)}
                 className="sm:hidden p-2 text-gray-400 hover:text-white transition-colors"
                 aria-label="Search"
               >
@@ -165,6 +158,29 @@ export default function Header() {
         </div>
       )}
       <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
+
+      {/* Mobile Search Modal */}
+      {mobileSearchOpen && (
+        <div className="sm:hidden fixed inset-0 z-40" role="dialog" aria-modal="true">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-[var(--background)]"
+            onClick={() => setMobileSearchOpen(false)}
+          />
+          {/* Modal Panel */}
+          <div className="absolute inset-0 flex items-start justify-center">
+            <div className="w-full">
+              <div className="p-4 flex items-center gap-2 justify-between">
+                <SearchForm />
+                <Button variant='transparent' onClick={() => setMobileSearchOpen(false)} >
+                  Cancel
+                </Button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
