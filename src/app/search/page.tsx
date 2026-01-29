@@ -40,7 +40,7 @@ export default function SearchPage() {
         setData(json as StreamingItem[]);
       } catch (e) {
         const isAbort = e instanceof DOMException && e.name === 'AbortError';
-        if (!isAbort) setError(e instanceof Error ? e.message : 'Search failed');
+        if (!isAbort) setError(e instanceof Error ? e.message : 'Suche fehlgeschlagen');
       } finally {
         setLoading(false);
       }
@@ -74,12 +74,12 @@ export default function SearchPage() {
     <div className="min-h-screen bg-gray-900">
       <Header />
       <main className="px-4 md:px-8 lg:px-12 py-8 space-y-6">
-        <h1 className="text-2xl md:text-3xl font-bold text-white">Search results for: {q || '—'}</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-white">Suchergebnisse für: {q || '—'}</h1>
         {error && (
           <div className="text-red-400">{error}</div>
         )}
         {loading && (
-          <div className="text-gray-300">Loading…</div>
+          <div className="text-gray-300">Wird geladen…</div>
         )}
         {!loading && !error && q && items.length === 0 && (
           <div className="px-4 md:px-8">
@@ -87,13 +87,13 @@ export default function SearchPage() {
               <svg className="w-12 h-12 text-gray-600 mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              <h2 className="text-white text-xl font-semibold">No results found</h2>
-              <p className="text-gray-400 mt-1">Try a different keyword or check your spelling.</p>
+              <h2 className="text-white text-xl font-semibold">Keine Ergebnisse gefunden</h2>
+              <p className="text-gray-400 mt-1">Versuchen Sie ein anderes Schlüsselwort oder überprüfen Sie die Schreibweise.</p>
             </div>
           </div>
         )}
         <RecommendedGrid
-          title="Results"
+          title="Ergebnisse"
           items={items}
           onItemClick={(item) => { setSelectedContent(item); setIsModalOpen(true); }}
           loading={loading}

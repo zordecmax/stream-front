@@ -44,7 +44,7 @@ export default function MyLiveStreamsPage() {
       setData(Array.isArray(json) ? json : []);
     } catch (e) {
       const isAbort = e instanceof DOMException && e.name === 'AbortError';
-      if (!isAbort) setError(e instanceof Error ? e.message : 'Failed to load live streams');
+      if (!isAbort) setError(e instanceof Error ? e.message : 'Fehler beim Laden von Live-Streams');
     } finally {
       setLoading(false);
     }
@@ -76,7 +76,7 @@ export default function MyLiveStreamsPage() {
       // Refresh list after successful toggle
       await fetchMyStreams();
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Action failed');
+      setError(e instanceof Error ? e.message : 'Aktion fehlgeschlagen');
     } finally {
       setBusyId(null);
     }
@@ -90,9 +90,9 @@ export default function MyLiveStreamsPage() {
       <Header />
       <main className="px-4 md:px-8 lg:px-12 py-8 space-y-8">
         <section>
-          <h1 className="text-2xl md:text-3xl font-bold text-white">My Live Streams</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-white">Meine Live-Streams</h1>
           {!isAuthed && (
-            <p className="mt-2 text-yellow-300">Please sign in to view your live streams.</p>
+            <p className="mt-2 text-yellow-300">Bitte melden Sie sich an, um Ihre Live-Streams anzuzeigen.</p>
           )}
         </section>
 
@@ -118,8 +118,8 @@ export default function MyLiveStreamsPage() {
               <svg className="w-12 h-12 text-gray-600 mb-3" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-              <h2 className="text-white text-xl font-semibold">No live streams yet</h2>
-              <p className="text-gray-400 mt-1">Create a new stream from the Create Live page.</p>
+              <h2 className="text-white text-xl font-semibold">Noch keine Live-Streams</h2>
+              <p className="text-gray-400 mt-1">Erstellen Sie einen neuen Stream auf der Seite Live-Stream erstellen.</p>
             </div>
           </section>
         ) : (
@@ -146,8 +146,8 @@ export default function MyLiveStreamsPage() {
                   </div>
                   <h3 className="text-white font-semibold text-sm">{s.title}</h3>
                   <p className="text-gray-400 text-sm">{s.description}</p>
-                  <div className="text-gray-500 text-xs mt-1">Status: {s.status}</div>
-                  <div className="text-gray-500 text-xs">Created: {new Date(s.createdAt).toLocaleString()}</div>
+                  <div className="text-gray-500 text-xs">Status: {s.status}</div>
+                  <div className="text-gray-500 text-xs">Erstellt: {new Date(s.createdAt).toLocaleString()}</div>
                   {s.playbackUrl && (
                     <div className="text-gray-400 text-xs truncate mt-1">{s.playbackUrl}</div>
                   )}
@@ -161,7 +161,7 @@ export default function MyLiveStreamsPage() {
                         disabled={busyId === s.id || !accessToken}
                         onClick={() => toggleStream(s.id, 'deactivate')}
                       >
-                        {busyId === s.id ? 'Deactivating…' : 'Deactivate'}
+                        {busyId === s.id ? 'Wird deaktiviert…' : 'Deaktivieren'}
                       </button>
                     ) : (
                       <button
@@ -169,7 +169,7 @@ export default function MyLiveStreamsPage() {
                         disabled={busyId === s.id || !accessToken}
                         onClick={() => toggleStream(s.id, 'activate')}
                       >
-                        {busyId === s.id ? 'Activating…' : 'Activate'}
+                        {busyId === s.id ? 'Wird aktiviert…' : 'Aktivieren'}
                       </button>
                     )}
                   </div>

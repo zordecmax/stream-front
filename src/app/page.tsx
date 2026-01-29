@@ -148,8 +148,8 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
           <div className="absolute bottom-0 left-0 p-8">
-            <h1 className="text-4xl font-bold text-white mb-2">Featured Live Stream</h1>
-            <p className="text-gray-300 text-lg">Watch the best content right now</p>
+            <h1 className="text-4xl font-bold text-white mb-2">Ausgewählter Live-Stream</h1>
+            <p className="text-gray-300 text-lg">Schauen Sie sich jetzt die besten Inhalte an</p>
           </div>
         </div>
       </section>
@@ -163,7 +163,7 @@ export default function Home() {
       /> */}
       {/* Recorded Videos */}
       <TrendingRow
-        title="Recorded Videos"
+        title="Aufgezeichnete Videos"
         items={liveItems}
         loading={loading}
         onItemClick={handleContentClick}
@@ -172,7 +172,7 @@ export default function Home() {
 
       {/* Recommended Grid */}
       <RecommendedGrid
-        title="Recommended for You"
+        title="Empfohlen für Sie"
         items={liveItems.length ? liveItems : mockStreams}
         onItemClick={handleContentClick}
       />

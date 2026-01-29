@@ -8,17 +8,17 @@ export default function Streams() {
         <img src="images/thumbnails/stream-pic.png" alt="" className='w-full' />
         <Badge variant="semitransparent" size="lg" className="absolute bottom-6 right-6">Zuschauer - 223.900</Badge>
       </div>
-      <h1 className='text-3xl font-bold'>Live streams</h1>
+      <h1 className='text-3xl font-bold'>Live-Streams</h1>
 
       <div className="flex gap-5 flex-wrap">
         <VideoCard
-          title="My first stream"
+          title="Mein erster Stream"
           channelName="EliasN97"
           viewers={128404}
           category="Live"
           image="images/thumbnails/i1.png"
           avatar="images/avatars/01.png"
-          game="Live Talk"
+          game="Live-Gespräch"
         />
 
         <VideoCard

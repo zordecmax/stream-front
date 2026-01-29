@@ -10,7 +10,7 @@ interface RecommendedGridProps {
   loading?: boolean;
 }
 
-export default function RecommendedGrid({ title = 'Recommended for You', items, onItemClick, loading = false }: RecommendedGridProps) {
+export default function RecommendedGrid({ title = 'Empfohlen für Sie', items, onItemClick, loading = false }: RecommendedGridProps) {
   const showSkeleton = loading;
 
   return (

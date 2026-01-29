@@ -10,7 +10,7 @@ interface BadgeProps {
 }
 
 export default function Badge({ children, variant = 'primary', size = 'md', className = '' }: BadgeProps) {
-  const baseStyles = 'inline-flex items-center rounded-xl font-semibold transition-colors whitespace-nowrap';
+  const baseStyles = 'inline-flex items-center rounded-full font-semibold transition-colors whitespace-nowrap';
 
   const sizeStyles = {
     sm: 'px-2.5 py-0.5 text-xs',

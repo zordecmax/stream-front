@@ -24,7 +24,7 @@ const StreamerItem: React.FC<StreamerItemProps> = ({
     const { leftSidebarCollapsed } = useLayout();
     return (
         <div className='flex gap-2 items-center'>
-            <img src={avatar} alt={name} className='w-9 h-9 object-cover aspect-square' />
+            <img src={avatar} alt={name} className='w-fit object-cover aspect-square rounded-full' />
             {!leftSidebarCollapsed &&
                 <>
                     <div className='flex flex-col grow'>

@@ -6,14 +6,18 @@ import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 import NavItem from './NavItem';
 import { IconBell, IconSearch, IconMenu2, IconChevronDown } from '@tabler/icons-react';
-
+import { Suspense } from 'react';
+import SearchForm from './SearchForm';
+import Button from './ui/Button';
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [authOpen, setAuthOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const { userEmail, logout } = useAuth();
-  // Read query from URL on client without useSearchParams to avoid SSR Suspense requirement
+
+  // Initialize searchQuery from the current URL on the client
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const q = new URLSearchParams(window.location.search).get('q') || '';
@@ -37,29 +41,21 @@ export default function Header() {
                 <NavItem href="/video" label="Durchsuchen" active />
                 <NavItem href="/streams" label="Abonniert" />
                 <NavItem href="/categories" label="Kategorien" />
-                <NavItem href="#" label="VOD" />
               </nav>
             </div>
 
             {/* Search Bar */}
             <div className="flex-1 max-w-md hidden sm:block">
-              <form className="relative" action="/search" method="GET">
-                <input
-                  type="text"
-                  name="q"
-                  placeholder="Streams, Spiele oder Nutzer suchen"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-gray-800 text-white placeholder-gray-500 px-4 py-2 pl-10 rounded-lg border border-gray-700 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all"
-                />
-                <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-              </form>
+              <Suspense fallback={null}>
+                <SearchForm />
+              </Suspense>
             </div>
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-3">
               {/* Search Icon - Mobile */}
               <button
+                onClick={() => setMobileSearchOpen(true)}
                 className="sm:hidden p-2 text-gray-400 hover:text-white transition-colors"
                 aria-label="Search"
               >
@@ -104,16 +100,16 @@ export default function Header() {
                           {userEmail.replace(/(.{3}).+(@.+)/, '$1…$2')}
                         </div>
                         <Link href="/live/create" className="block px-3 py-2 text-sm text-white hover:bg-gray-800" onClick={() => setProfileOpen(false)}>
-                          Create Live
+                          Live erstellen
                         </Link>
                         <Link href="/live-streams/my" className="block px-3 py-2 text-sm text-white hover:bg-gray-800" onClick={() => setProfileOpen(false)}>
-                          My Live Streams
+                          Meine Live-Streams
                         </Link>
                         <button
                           className="w-full text-left px-3 py-2 text-sm text-red-300 hover:bg-gray-800"
                           onClick={() => { setProfileOpen(false); logout(); }}
                         >
-                          Logout
+                          Abmelden
                         </button>
                       </div>
                     </div>
@@ -122,7 +118,7 @@ export default function Header() {
               ) : (
 
                 <button onClick={() => setAuthOpen(true)} className="bg-purple-600 hover:bg-purple-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors">
-                  Sign Up
+                  Anmelden
                 </button>
               )}
 
@@ -151,12 +147,11 @@ export default function Header() {
                 <NavItem href="/video" label="Durchsuchen" active onClick={() => setMobileOpen(false)} />
                 <NavItem href="/streams" label="Abonniert" onClick={() => setMobileOpen(false)} />
                 <NavItem href="/categories" label="Kategorien" onClick={() => setMobileOpen(false)} />
-                <NavItem href="#" label="VOD" onClick={() => setMobileOpen(false)} />
 
                 {userEmail && (
                   <>
-                    <NavItem href="/live-streams/my" onClick={() => setMobileOpen(false)} label='My Live Streams' />
-                    <NavItem href="/live/create" onClick={() => setMobileOpen(false)} label='Create Live' />
+                    <NavItem href="/live-streams/my" onClick={() => setMobileOpen(false)} label='Meine Live-Streams' />
+                    <NavItem href="/live/create" onClick={() => setMobileOpen(false)} label='Live erstellen' />
                   </>
                 )}
               </nav>
@@ -165,6 +160,31 @@ export default function Header() {
         </div>
       )}
       <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
+
+      {/* Mobile Search Modal */}
+      {mobileSearchOpen && (
+        <div className="sm:hidden fixed inset-0 z-40" role="dialog" aria-modal="true">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-[var(--background)]"
+            onClick={() => setMobileSearchOpen(false)}
+          />
+          {/* Modal Panel */}
+          <div className="absolute inset-0 flex items-start justify-center">
+            <div className="w-full">
+              <div className="p-4 flex items-center gap-2 justify-between">
+                <Suspense fallback={null}>
+                  <SearchForm />
+                </Suspense>
+                <Button variant='transparent' onClick={() => setMobileSearchOpen(false)} >
+                  Abbrechen
+                </Button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
