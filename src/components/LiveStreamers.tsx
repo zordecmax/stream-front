@@ -31,7 +31,7 @@ export default function LiveStreamers({ streamers }: LiveStreamersProps) {
                     }
                     <IconArrowBarToLeft className={`w-6 h-6 hidden md:block cursor-pointer ${leftSidebarCollapsed ? "rotate-180" : ""}`} onClick={() => toggleLeftSidebar()} />
                 </div>
-                <div className="space-y-4">
+                <div className="flex flex-col gap-4">
                     {streamers.map((streamer, index) => (
                         <StreamerItem
                             key={index}

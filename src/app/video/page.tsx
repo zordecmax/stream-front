@@ -5,7 +5,7 @@ import { mockMessages } from "@/data/mockData";
 import StreamChat from "@/components/Chat/StreamChat";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
-import { IconHeart, IconPointFilled } from '@tabler/icons-react';
+import { IconHeart, IconPointFilled, IconUpload, IconDotsVertical } from '@tabler/icons-react';
 import { useLayout } from "@/context/LayoutContext";
 
 export default function Video() {
@@ -39,9 +39,15 @@ export default function Video() {
         <Button variant="secondary"><IconHeart /></Button>
         <Button variant="primary">Abonnieren</Button>
       </div>
-      <div className="flex gap-2 -mt-2 ms-20">
-        <Badge variant="primary" className="w-fit">Unterhaltung</Badge>
-        <Badge variant="primary" className="w-fit">Live <IconPointFilled /></Badge>
+      <div className="flex gap-2 -mt-2 ms-20 justify-between items-center">
+        <div className="flex gap-2">
+          <Badge variant="primary" className="w-fit">Unterhaltung</Badge>
+          <Badge variant="primary" className="w-fit">Live <IconPointFilled /></Badge>
+        </div>
+        <div className="flex gap-2">
+          <IconUpload />
+          <IconDotsVertical />
+        </div>
       </div>
 
       <div className="bg-gray-800/80 p-4 rounded-lg space-y-4">
