@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from "react
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const SIDEBAR_WIDTH = "300px";
-const SIDEBAR_WIDTH_COLLAPSED = "68px";
+const SIDEBAR_WIDTH_COLLAPSED = "var(--sidebar-collapsed-width)";
 const MOBILE_BREAKPOINT = "(max-width: 1024px)"; // < lg
 
 type LayoutContextType = {
