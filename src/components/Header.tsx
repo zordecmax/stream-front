@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 import NavItem from './NavItem';
 import { IconBell, IconSearch, IconMenu2, IconChevronDown } from '@tabler/icons-react';
+import { Suspense } from 'react';
 import SearchForm from './SearchForm';
 import Button from './ui/Button';
 export default function Header() {
@@ -15,6 +16,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const { userEmail, logout } = useAuth();
+
   // Read query from URL on client without useSearchParams to avoid SSR Suspense requirement
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -45,7 +47,9 @@ export default function Header() {
 
             {/* Search Bar */}
             <div className="flex-1 max-w-md hidden sm:block">
-              <SearchForm />
+              <Suspense fallback={null}>
+                <SearchForm />
+              </Suspense>
             </div>
 
             {/* Right Side Actions */}
@@ -171,7 +175,9 @@ export default function Header() {
           <div className="absolute inset-0 flex items-start justify-center">
             <div className="w-full">
               <div className="p-4 flex items-center gap-2 justify-between">
-                <SearchForm />
+                <Suspense fallback={null}>
+                  <SearchForm />
+                </Suspense>
                 <Button variant='transparent' onClick={() => setMobileSearchOpen(false)} >
                   Abbrechen
                 </Button>
