@@ -33,7 +33,7 @@ export default function Video() {
         <img src="images/avatars/00.png" alt="user" className='w-18 h-18 object-cover aspect-square' />
         <div className='flex flex-col grow gap-1'>
           <h4 className='font-semibold text-2xl'>MckyTV</h4>
-          <span className='font-medium text-secondary'>Telekom is the best network</span>
+          <span className='font-medium text-secondary'>Telekom ist das beste Netzwerk</span>
 
         </div>
         <Button variant="secondary"><IconHeart /></Button>

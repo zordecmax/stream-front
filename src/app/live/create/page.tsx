@@ -62,7 +62,7 @@ export default function CreateLiveStreamPage() {
       const json = (await res.json()) as CreateStreamResponse;
       setResult(json);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error');
+      setError(err instanceof Error ? err.message : 'Unbekannter Fehler');
     } finally {
       setLoading(false);
     }
@@ -73,38 +73,38 @@ export default function CreateLiveStreamPage() {
       <Header />
       <main className="px-4 md:px-8 lg:px-12 py-8 space-y-8">
         <section>
-          <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">Create Live Stream</h1>
-          <p className="text-gray-300">Authenticated users can create a new Mux-backed live stream and get the stream key for OBS.</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">Live-Stream erstellen</h1>
+          <p className="text-gray-300">Authentifizierte Benutzer können einen neuen Mux-gestützten Live-Stream erstellen und den Stream-Schlüssel für OBS erhalten.</p>
         </section>
 
         {!accessToken && (
           <div className="rounded-lg border border-gray-800 bg-gray-900 p-4 text-yellow-300">
-            You are not signed in. Please sign in to create a live stream.
+            Sie sind nicht angemeldet. Bitte melden Sie sich an, um einen Live-Stream zu erstellen.
           </div>
         )}
 
         <section className="rounded-lg border border-gray-800 bg-gray-900 p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm text-gray-300 mb-1" htmlFor="title">Title</label>
+              <label className="block text-sm text-gray-300 mb-1" htmlFor="title">Titel</label>
               <input
                 id="title"
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full bg-gray-800 text-white placeholder-gray-500 px-4 py-2 rounded-lg border border-gray-700 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
-                placeholder="My Gaming Stream"
+                placeholder="Mein Gaming-Stream"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm text-gray-300 mb-1" htmlFor="description">Description</label>
+              <label className="block text-sm text-gray-300 mb-1" htmlFor="description">Beschreibung</label>
               <textarea
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 className="w-full bg-gray-800 text-white placeholder-gray-500 px-4 py-2 rounded-lg border border-gray-700 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20"
-                placeholder="Playing Minecraft with friends"
+                placeholder="Spielen Sie Minecraft mit Freunden"
                 rows={3}
               />
             </div>
@@ -114,7 +114,7 @@ export default function CreateLiveStreamPage() {
                 disabled={!canSubmit || loading}
                 className="bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white font-semibold px-4 py-2 rounded-lg"
               >
-                {loading ? 'Creating…' : 'Create Stream'}
+                {loading ? 'Wird erstellt…' : 'Stream erstellen'}
               </button>
               {error && <span className="text-red-400 text-sm">{error}</span>}
             </div>
@@ -123,30 +123,30 @@ export default function CreateLiveStreamPage() {
 
         {result && (
           <section className="rounded-lg border border-gray-800 bg-gray-900 p-6 space-y-4">
-            <h2 className="text-xl font-semibold text-white">Stream Created</h2>
+            <h2 className="text-xl font-semibold text-white">Stream erstellt</h2>
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <div className="text-gray-300"><span className="text-gray-400">Title:</span> {result.title}</div>
-                <div className="text-gray-300"><span className="text-gray-400">Description:</span> {result.description}</div>
+                <div className="text-gray-300"><span className="text-gray-400">Titel:</span> {result.title}</div>
+                <div className="text-gray-300"><span className="text-gray-400">Beschreibung:</span> {result.description}</div>
                 <div className="text-gray-300"><span className="text-gray-400">Status:</span> {result.status}</div>
-                <div className="text-gray-300"><span className="text-gray-400">Email:</span> {result.user?.email}</div>
-                <div className="text-gray-300"><span className="text-gray-400">Stream Key:</span> <code className="text-purple-300">{result.streamKey}</code></div>
+                <div className="text-gray-300"><span className="text-gray-400">E-Mail:</span> {result.user?.email}</div>
+                <div className="text-gray-300"><span className="text-gray-400">Stream-Schlüssel:</span> <code className="text-purple-300">{result.streamKey}</code></div>
                 <div className="text-gray-300"><span className="text-gray-400">RTMPS URL:</span> <code className="text-purple-300">rtmps://global-live.mux.com:443/app</code></div>
-                <div className="text-gray-300"><span className="text-gray-400">Playback ID:</span> <code className="text-purple-300">{result.playbackId}</code></div>
-                <div className="text-gray-300"><span className="text-gray-400">Playback URL:</span> <code className="text-purple-300">{result.playbackUrl}</code></div>
+                <div className="text-gray-300"><span className="text-gray-400">Wiedergabe-ID:</span> <code className="text-purple-300">{result.playbackId}</code></div>
+                <div className="text-gray-300"><span className="text-gray-400">Wiedergabe-URL:</span> <code className="text-purple-300">{result.playbackUrl}</code></div>
               </div>
 
               <div className="space-y-3">
-                <h3 className="text-white font-semibold">How to stream with OBS (MUX)</h3>
+                <h3 className="text-white font-semibold">So streamen Sie mit OBS (MUX)</h3>
                 <ol className="list-decimal ml-5 text-gray-300 space-y-1">
-                  <li>Open OBS and go to Settings → Stream.</li>
-                  <li>Service: Custom...</li>
+                  <li>Öffnen Sie OBS und gehen Sie zu Einstellungen → Stream.</li>
+                  <li>Service: Benutzerdefiniert...</li>
                   <li>Server: <code className="text-purple-300">rtmps://global-live.mux.com:443/app</code></li>
-                  <li>Stream Key: <code className="text-purple-300">{result.streamKey}</code></li>
-                  <li>Apply and Start Streaming.</li>
+                  <li>Stream-Schlüssel: <code className="text-purple-300">{result.streamKey}</code></li>
+                  <li>Anwenden und mit dem Streaming beginnen.</li>
                 </ol>
-                <p className="text-gray-400 text-sm">You can preview your live playback using the Mux player below once the stream is active.</p>
+                <p className="text-gray-400 text-sm">Sie können die Live-Wiedergabe mit dem Mux-Player unten in der Vorschau anzeigen, sobald der Stream aktiv ist.</p>
               </div>
             </div>
 

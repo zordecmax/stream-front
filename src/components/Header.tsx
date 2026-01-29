@@ -97,16 +97,16 @@ export default function Header() {
                           {userEmail.replace(/(.{3}).+(@.+)/, '$1…$2')}
                         </div>
                         <Link href="/live/create" className="block px-3 py-2 text-sm text-white hover:bg-gray-800" onClick={() => setProfileOpen(false)}>
-                          Create Live
+                          Live erstellen
                         </Link>
                         <Link href="/live-streams/my" className="block px-3 py-2 text-sm text-white hover:bg-gray-800" onClick={() => setProfileOpen(false)}>
-                          My Live Streams
+                          Meine Live-Streams
                         </Link>
                         <button
                           className="w-full text-left px-3 py-2 text-sm text-red-300 hover:bg-gray-800"
                           onClick={() => { setProfileOpen(false); logout(); }}
                         >
-                          Logout
+                          Abmelden
                         </button>
                       </div>
                     </div>
@@ -115,7 +115,7 @@ export default function Header() {
               ) : (
 
                 <button onClick={() => setAuthOpen(true)} className="bg-purple-600 hover:bg-purple-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors">
-                  Sign Up
+                  Anmelden
                 </button>
               )}
 
@@ -148,8 +148,8 @@ export default function Header() {
 
                 {userEmail && (
                   <>
-                    <NavItem href="/live-streams/my" onClick={() => setMobileOpen(false)} label='My Live Streams' />
-                    <NavItem href="/live/create" onClick={() => setMobileOpen(false)} label='Create Live' />
+                    <NavItem href="/live-streams/my" onClick={() => setMobileOpen(false)} label='Meine Live-Streams' />
+                    <NavItem href="/live/create" onClick={() => setMobileOpen(false)} label='Live erstellen' />
                   </>
                 )}
               </nav>
@@ -173,7 +173,7 @@ export default function Header() {
               <div className="p-4 flex items-center gap-2 justify-between">
                 <SearchForm />
                 <Button variant='transparent' onClick={() => setMobileSearchOpen(false)} >
-                  Cancel
+                  Abbrechen
                 </Button>
 
               </div>

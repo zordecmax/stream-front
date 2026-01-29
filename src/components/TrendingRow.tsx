@@ -17,7 +17,7 @@ export interface StreamContent {
   bunnyConfig?: BunnyVideoConfig;
 }
 
-export interface LiveStreamContent  {
+export interface LiveStreamContent {
   id: string;
   playbackId: string;
   title: string;
@@ -35,7 +35,7 @@ export interface TrendingRowProps {
 }
 
 export default function TrendingRow({
-  title = 'Trending Now',
+  title = 'Trends jetzt',
   items,
   onItemClick,
   loading = false,
@@ -71,7 +71,7 @@ export default function TrendingRow({
               <div className="flex items-center justify-center w-full py-8">
                 <div className="text-center text-gray-400">
                   <IconSearch className="w-12 h-12 mx-auto mb-3" />
-                  <p>No items available</p>
+                  <p>Keine Elemente verfügbar</p>
                 </div>
               </div>
             ) : (
