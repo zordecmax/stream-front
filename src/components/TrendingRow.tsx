@@ -90,10 +90,6 @@ export default function TrendingRow({
             )}
           </div>
         </div>
-
-        {/* Optional: Scroll Gradient Overlays */}
-        <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-gray-900 to-transparent pointer-events-none"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-gray-900 to-transparent pointer-events-none"></div>
       </div>
     </section>
   );
