@@ -24,7 +24,6 @@ interface ContentModalProps {
 export default function ContentModal({ isOpen, content, onClose, isLive }: ContentModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  console.log('ContentModal render - isOpen:', isOpen, 'content:', content);
   // Handle Escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
