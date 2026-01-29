@@ -35,7 +35,7 @@ export default function StreamChat({ messages }: StreamChatProps) {
         max-h-[calc(100dvh-var(--navbar-height))]
         w-[var(--sidebar-width-right)]
         overflow-y-auto p-4
-        ${isMobile ? "relative w-full max-h-auto" : ""}
+        ${isMobile ? "relative w-full max-h-none" : ""}
       `}
       >
         <div className="flex flex-col justify-between gap-6 overflow-y-auto scroll-macos">
