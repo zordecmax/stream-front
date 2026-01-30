@@ -5,8 +5,6 @@ import BunnyVideoPlayer from './BunnyVideoPlayer';
 import { LiveStreamContent, StreamContent } from './TrendingRow';
 import Button from './ui/Button';
 import Badge from './ui/Badge';
-import { IconPlayerPlay } from '@tabler/icons-react';
-
 // interface LiveStreamContent  {
 //   playbackId: string;
 //   id: string;
