@@ -10,6 +10,7 @@ import { useStreamingData, StreamingItem } from '@/hooks/useStreamingData';
 import MuxVideoPlayer from '@/components/MuxVideoPlayer';
 import { useLiveStreamingData } from '@/hooks/useLiveStreamingData';
 import SwiperHome from '@/components/SwiperHome';
+import VideoCard from '@/components/VideoCard';
 
 // Mock data for demonstration
 // Fallback/mock data (currently unused)
@@ -93,7 +94,7 @@ export default function Home() {
     refreshInterval: 0, // optional (ms); e.g., 60000 for 1 min
   });
 
-  const { data: liveData, loading: liveLoading, error: liveError, refresh } = useLiveStreamingData({ refreshInterval: 30000 });
+  // const { data: liveData, loading: liveLoading, error: liveError, refresh } = useLiveStreamingData({ refreshInterval: 30000 });
 
 
 
@@ -108,7 +109,8 @@ export default function Home() {
       id: item.id,
       title: item.title,
       streamer: 'HYPE',
-      viewers: `${item.rating} ⭐`,
+      streamerAvatar: 'images/avatars/01.png',
+      viewers: `${Math.floor(Math.random() * 10000).toLocaleString('de-DE')}`,
       game: item.genre,
       thumbnail: item.thumbnailUrl,
       tags: item.cast?.slice(0, 3) ?? [],
@@ -122,6 +124,7 @@ export default function Home() {
 
   const liveItems: StreamContent[] = useMemo(() => {
     if (!data || data.length === 0) return [];
+    console.log('Mapping data to live items:', data);
     return data.map(mapItemToContent);
   }, [data]);
 
