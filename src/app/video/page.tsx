@@ -29,17 +29,21 @@ export default function Video() {
         ></iframe>
       </div>
 
-      <div className='flex gap-2 items-center'>
-        <img src="images/avatars/00.png" alt="user" className='w-18 h-18 object-cover aspect-square' />
-        <div className='flex flex-col grow gap-1'>
+      <div className='flex flex-wrap sm:flex-nowrap gap-2 gap-y-6 items-center w-full'>
+
+        <img src="images/avatars/00.png" alt="user" className='w-18 h-18 object-cover aspect-square flex-none' />
+        <div className='flex flex-col grow gap-1 flex-1'>
           <h4 className='font-semibold text-2xl'>MckyTV</h4>
           <span className='font-medium text-secondary'>Telekom ist das beste Netzwerk</span>
 
         </div>
-        <Button variant="secondary"><IconHeart /></Button>
-        <Button variant="primary">Abonnieren</Button>
+        <div className="flex gap-2 basis-full sm:basis-auto">
+          <Button variant="secondary"><IconHeart /></Button>
+          <Button variant="primary" className="">Abonnieren</Button>
+        </div>
       </div>
-      <div className="flex gap-2 -mt-2 ms-20 justify-between items-center">
+
+      <div className="flex gap-2 gap-y-6 -mt-2 m-0 sm:ms-20 justify-between items-center flex-wrap">
         <div className="flex gap-2">
           <Badge variant="primary" className="w-fit">Unterhaltung</Badge>
           <Badge variant="primary" className="w-fit">Live <IconPointFilled /></Badge>
