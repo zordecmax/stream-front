@@ -1,20 +1,6 @@
 @import "tailwindcss";
 /* Plyr styles are imported via JS in layout.tsx to avoid @import order issues */
 
-:root {
-    --background: #101827;
-    --foreground: #ffffff;
-}
-
-/* Removed unsupported @theme rule to avoid CSS parse errors */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #101827;
-    --foreground: #ffffff;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
@@ -23,8 +9,8 @@ body {
 
 @theme {
 
-    --background: #101827;
-    --foreground: #ffffff;
+  --background: #101827;
+  --foreground: #ffffff;
   /* Layout sizes */
   --navbar-height: 77px;
   --sidebar-width-left: 300px;

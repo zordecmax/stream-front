@@ -1,17 +1,12 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Image from 'next/image';
 import TrendingRow, { LiveStreamContent } from '@/components/TrendingRow';
 import RecommendedGrid from '@/components/RecommendedGrid';
 import ContentModal from '@/components/ContentModal';
 import { StreamContent } from '@/components/TrendingRow';
 import { useStreamingData, StreamingItem } from '@/hooks/useStreamingData';
-import MuxVideoPlayer from '@/components/MuxVideoPlayer';
-import { useLiveStreamingData } from '@/hooks/useLiveStreamingData';
 import SwiperHome from '@/components/SwiperHome';
-import VideoCard from '@/components/VideoCard';
-import ContentCard from '@/components/ContentCard';
 
 // Mock data for demonstration
 // Fallback/mock data (currently unused)
@@ -83,8 +78,6 @@ const mockStreams: StreamContent[] = [
   },
 ];
 
-// const categories = [ /* unused in current view */ ];
-
 export default function Home() {
   const [selectedContent, setSelectedContent] = useState<StreamContent | LiveStreamContent | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -96,8 +89,6 @@ export default function Home() {
   });
 
   // const { data: liveData, loading: liveLoading, error: liveError, refresh } = useLiveStreamingData({ refreshInterval: 30000 });
-
-
 
   const CDN_HOSTNAME = 'vz-86921353-a1a.b-cdn.net';
 
@@ -125,7 +116,6 @@ export default function Home() {
 
   const liveItems: StreamContent[] = useMemo(() => {
     if (!data || data.length === 0) return [];
-    console.log('Mapping data to live items:', data);
     return data.map(mapItemToContent);
   }, [data]);
 
@@ -147,8 +137,6 @@ export default function Home() {
         onItemClick={handleContentClick}
       />
 
-
-
       {/* Live Channels */}
       {/* <TrendingRow
         title="Live streams"
@@ -164,14 +152,12 @@ export default function Home() {
         onItemClick={handleContentClick}
       />
 
-
       {/* Recommended Grid */}
       {/* <RecommendedGrid
         title="Empfohlen für Sie"
         items={liveItems.length ? liveItems : mockStreams}
         onItemClick={handleContentClick}
       /> */}
-
 
       {/* Modal */}
       {selectedContent && (

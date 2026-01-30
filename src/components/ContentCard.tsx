@@ -84,7 +84,7 @@ export default function ContentCard({ content, onClick }: ContentCardProps) {
       {/* Content Info */}
 
       <div className='flex gap-3 items-center'>
-        <img src={'streamerAvatar' in content ? content.streamerAvatar : 'images/avatars/default.png'} alt={'streamer' in content ? content.streamer : 'Unbekannter Streamer'} className='w-10 h-10 object-cover aspect-square rounded-full' />
+        <img src={'streamerAvatar' in content ? content.streamerAvatar : '/images/avatars/01.png'} alt={'streamer' in content ? content.streamer : 'Unbekannter Streamer'} className='w-10 h-10 object-cover aspect-square rounded-full' />
         <div className='flex flex-col grow'>
           <h4 className='font-semibold'>{content.title}</h4>
           <span className='font-medium text-secondary'>

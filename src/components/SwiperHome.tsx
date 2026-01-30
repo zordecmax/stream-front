@@ -1,17 +1,10 @@
-import React, { useRef, useState } from 'react';
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
-
-// import required modules
 import { EffectCoverflow, Scrollbar, Mousewheel } from 'swiper/modules';
 import { StreamContent, LiveStreamContent } from './TrendingRow';
 import ContentCard from './ContentCard';
 import { useRouter } from 'next/navigation';
-
 
 export interface SwiperProps {
     title?: string;
