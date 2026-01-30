@@ -35,11 +35,13 @@ export default function RootLayout({
 
             <LiveStreamers streamers={mockStreamers} />
 
-            <main className=" p-4 space-y-6 min-h-screen ml-[var(--sidebar-width-left)] mr-[var(--sidebar-width-right)] transition-[padding,margin] duration-300 ease-in-out mt-[var(--navbar-height)]">
-              {children}
-            </main>
+            <div className="pl-0 md:pl-4 p-4 min-h-[calc(100vh-var(--navbar-height))] ml-[var(--sidebar-width-left)] mr-[var(--sidebar-width-right)] min-w-[calc(100vw-var(--sidebar-collapsed-width))] sm:min-w-auto transition-[padding,margin] duration-300 ease-in-out mt-[var(--navbar-height)] flex flex-col grow gap-6">
+              <main className="grow space-y-6">
+                {children}
+              </main>
+              <Footer />
+            </div>
 
-            <Footer />
           </LayoutProvider>
         </AuthProvider>
       </body>

@@ -38,7 +38,6 @@ export default function Header() {
 
               {/* Navigation - Desktop */}
               <nav className="hidden md:flex items-center gap-6">
-                <NavItem href="/video" label="Durchsuchen" active />
                 <NavItem href="/streams" label="Abonniert" />
                 <NavItem href="/categories" label="Kategorien" />
               </nav>
@@ -144,7 +143,6 @@ export default function Header() {
           <div className="absolute top-[var(--navbar-height)] left-0 right-0 bg-gray-900 border-b border-gray-800 shadow-lg">
             <div className="px-4 py-4 space-y-2">
               <nav className="flex flex-col gap-2">
-                <NavItem href="/video" label="Durchsuchen" active onClick={() => setMobileOpen(false)} />
                 <NavItem href="/streams" label="Abonniert" onClick={() => setMobileOpen(false)} />
                 <NavItem href="/categories" label="Kategorien" onClick={() => setMobileOpen(false)} />
 
