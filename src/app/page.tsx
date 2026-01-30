@@ -9,6 +9,7 @@ import { StreamContent } from '@/components/TrendingRow';
 import { useStreamingData, StreamingItem } from '@/hooks/useStreamingData';
 import MuxVideoPlayer from '@/components/MuxVideoPlayer';
 import { useLiveStreamingData } from '@/hooks/useLiveStreamingData';
+import SwiperHome from '@/components/SwiperHome';
 
 // Mock data for demonstration
 // Fallback/mock data (currently unused)
@@ -136,23 +137,7 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="mb-12">
-        <div className="relative h-[400px] rounded-lg overflow-hidden">
-          <Image
-            src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&h=400&fit=crop"
-            alt="Featured content"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 p-8">
-            <h1 className="text-4xl font-bold text-white mb-2">Ausgewählter Live-Stream</h1>
-            <p className="text-gray-300 text-lg">Schauen Sie sich jetzt die besten Inhalte an</p>
-          </div>
-        </div>
-      </section>
+      <SwiperHome />
 
       {/* Live Channels */}
       {/* <TrendingRow
@@ -171,11 +156,11 @@ export default function Home() {
 
 
       {/* Recommended Grid */}
-      <RecommendedGrid
+      {/* <RecommendedGrid
         title="Empfohlen für Sie"
         items={liveItems.length ? liveItems : mockStreams}
         onItemClick={handleContentClick}
-      />
+      /> */}
 
 
       {/* Modal */}
