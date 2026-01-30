@@ -11,6 +11,7 @@ import MuxVideoPlayer from '@/components/MuxVideoPlayer';
 import { useLiveStreamingData } from '@/hooks/useLiveStreamingData';
 import SwiperHome from '@/components/SwiperHome';
 import VideoCard from '@/components/VideoCard';
+import ContentCard from '@/components/ContentCard';
 
 // Mock data for demonstration
 // Fallback/mock data (currently unused)
@@ -140,7 +141,13 @@ export default function Home() {
 
   return (
     <>
-      <SwiperHome />
+      <SwiperHome
+        items={liveItems}
+        loading={loading}
+        onItemClick={handleContentClick}
+      />
+
+
 
       {/* Live Channels */}
       {/* <TrendingRow

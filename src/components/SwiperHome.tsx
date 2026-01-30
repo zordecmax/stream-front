@@ -8,9 +8,22 @@ import 'swiper/css/effect-coverflow';
 
 // import required modules
 import { EffectCoverflow, Scrollbar, Mousewheel } from 'swiper/modules';
+import { StreamContent, LiveStreamContent } from './TrendingRow';
+import ContentCard from './ContentCard';
+import { useRouter } from 'next/navigation';
 
-export default function SwiperHome() {
+
+export interface SwiperProps {
+    title?: string;
+    items: StreamContent[] | LiveStreamContent[] | null;
+    onItemClick: (item: StreamContent | LiveStreamContent) => void;
+    loading?: boolean;
+}
+
+export default function SwiperHome({ title, items, onItemClick, loading }: SwiperProps) {
+    const router = useRouter();
     return (
+
         <Swiper
             scrollbar={true}
             slidesPerView={1}
@@ -81,16 +94,38 @@ export default function SwiperHome() {
                 slideShadows: false,
             }}
             grabCursor={true}
-            centeredSlides={true}
             loop={true}
             pagination={false}
             modules={[EffectCoverflow, Scrollbar, Mousewheel]}
+            slideToClickedSlide={true}
         >
-            {Array.from({ length: 7 }, (_, i) => (
-                <SwiperSlide>
-                    <img src={`/images/slider/0${i}.jpg`} alt="stream" className='w-auto h-52 md:h-80 object-cover aspect-video' />
-                </SwiperSlide>
-            ))}
+            {
+                loading ? (
+                    // Loading state: skeletons
+                    <>
+                        {[...Array(6)].map((_, i) => (
+                            <SwiperSlide className='bg-[var(--background)]' key={i}>
+                                <div
+                                    className="flex-none w-[280px] md:w-[320px] animate-pulse"
+                                >
+                                    <div className="bg-gray-700 rounded-lg aspect-video mb-3"></div>
+                                    <div className="h-4 bg-gray-700 rounded w-3/4 mb-2"></div>
+                                    <div className="h-3 bg-gray-700 rounded w-1/2"></div>
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                    </>
+                ) : (
+                    items?.map((item) => (
+                        <SwiperSlide className='bg-[var(--background)]' key={item.id}>
+                            <ContentCard
+                                content={item}
+                                onClick={() => router.push(`/videos/${item.id}`)}
+                            />
+                        </SwiperSlide>
+                    ))
+                )
+            }
         </Swiper>
     );
 }

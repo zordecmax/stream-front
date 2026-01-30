@@ -19,7 +19,7 @@ import { IconPlayerPlay } from '@tabler/icons-react';
 
 interface ContentCardProps {
   content: StreamContent | LiveStreamContent;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export default function ContentCard({ content, onClick }: ContentCardProps) {
@@ -33,7 +33,7 @@ export default function ContentCard({ content, onClick }: ContentCardProps) {
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          onClick();
+          onClick && onClick();
         }
       }}
     >
@@ -79,13 +79,6 @@ export default function ContentCard({ content, onClick }: ContentCardProps) {
           {'viewers' in content ? content.viewers : 0} Zuschauer
         </Badge>
 
-        {/* Hover Overlay with Play Icon */}
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center transform scale-90 group-hover:scale-100 transition-transform duration-300">
-            {/* Play Icon */}
-            <IconPlayerPlay className="w-8 h-8 text-gray-900 ml-1" />
-          </div>
-        </div>
       </div>
 
       {/* Content Info */}

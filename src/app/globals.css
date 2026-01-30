@@ -23,6 +23,8 @@ body {
 
 @theme {
 
+    --background: #101827;
+    --foreground: #ffffff;
   /* Layout sizes */
   --navbar-height: 77px;
   --sidebar-width-left: 300px;

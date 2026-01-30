@@ -3,7 +3,7 @@
 import ContentCard from './ContentCard';
 import type { BunnyVideoConfig } from './BunnyVideoPlayer';
 import { IconSearch } from '@tabler/icons-react';
-import VideoCard from './VideoCard';
+import { useRouter } from 'next/navigation';
 
 export interface StreamContent {
   id: string;
@@ -43,6 +43,7 @@ export default function TrendingRow({
   loading = false,
 }: TrendingRowProps) {
   const list = items ?? [];
+  const router = useRouter();
 
   return (
     <section className="mb-8 md:mb-12">
@@ -66,7 +67,7 @@ export default function TrendingRow({
                     <div className="h-4 bg-gray-700 rounded w-3/4 mb-2"></div>
                     <div className="h-3 bg-gray-700 rounded w-1/2"></div>
                   </div>
-                ))}                
+                ))}
               </>
             ) : list.length === 0 ? (
               // Empty state: no data
@@ -86,7 +87,7 @@ export default function TrendingRow({
                 >
                   <ContentCard
                     content={item}
-                    onClick={() => onItemClick(item)}
+                    onClick={() => router.push(`/videos/${item.id}`)}
                   />
                 </div>
               ))

@@ -8,7 +8,13 @@ import Badge from "@/components/ui/Badge";
 import { IconHeart, IconPointFilled, IconUpload, IconDotsVertical } from '@tabler/icons-react';
 import { useLayout } from "@/context/LayoutContext";
 
-export default function Video() {
+interface VideoPageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function Video({ params }: VideoPageProps) {
   const { setRightSidebarEnabled } = useLayout();
 
   useEffect(() => {
@@ -18,6 +24,7 @@ export default function Video() {
 
   return (
     <div className="flex flex-col gap-8 relative  overflow-y-auto scroll-macos">
+      ID: {params.id}
 
       {/* video */}
       <div className="relative aspect-video bg-black rounded-lg">
