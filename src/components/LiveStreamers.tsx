@@ -3,11 +3,14 @@
 import { IconArrowBarToLeft } from '@tabler/icons-react';
 import StreamerItem from './StreamerItem';
 import { useLayout } from "@/context/LayoutContext";
+import { useRouter } from 'next/navigation';
 
 interface StreamerData {
     name: string;
     viewers: number;
     game: string;
+    avatar: string;
+    link?: string;
 }
 
 interface LiveStreamersProps {
@@ -16,6 +19,7 @@ interface LiveStreamersProps {
 
 export default function LiveStreamers({ streamers }: LiveStreamersProps) {
     const { toggleLeftSidebar, leftSidebarCollapsed } = useLayout();
+    const router = useRouter();
     return (
         <aside className={`
         fixed h-[calc(100vh-var(--navbar-height))] left-0 p-4 top-[var(--navbar-height)] w-[var(--sidebar-width-left)] transition-all duration-300 ease-in-out
@@ -38,11 +42,15 @@ export default function LiveStreamers({ streamers }: LiveStreamersProps) {
                 {streamers.map((streamer, index) => (
                     <StreamerItem
                         key={index}
-                        avatar={`/images/avatars/0${String(index + 1)}.png`}
+                        avatar={streamer.avatar}
                         name={streamer.name}
                         game={streamer.game}
                         viewers={streamer.viewers}
                         isLive={true}
+                        {...streamer.link && streamer.link.length > 0 ?
+                        { onClick: () => { router.push(streamer.link!) } }
+                        : {}
+                        }
                     />
                 ))}
             </div>

@@ -21,24 +21,46 @@ const LayoutContext = createContext<LayoutContextType | null>(null);
 
 export function LayoutProvider({ children }: { children: ReactNode }) {
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT);
-  
+
   const [leftSidebarCollapsed, setLeftCollapsed] = useState(false);
   const [rightSidebarEnabled, setRightSidebarEnabled] = useState(false);
   const [rightSidebarCollapsed, setRightCollapsed] = useState(false);
+  const [isMobileFirstLoad, setIsMobileFirstLoad] = useState(true);
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  // 🔥 AUTO-COLLAPSE ON SMALL SCREENS
+  // 🔄 LOAD SIDEBAR STATE FROM LOCALSTORAGE AFTER HYDRATION
   useEffect(() => {
-    if (isMobile) {
+    const savedLeftCollapsed = localStorage.getItem("leftSidebarCollapsed");
+    const savedRightEnabled = localStorage.getItem("rightSidebarEnabled");
+    const savedRightCollapsed = localStorage.getItem("rightSidebarCollapsed");
+
+    if (savedLeftCollapsed) setLeftCollapsed(JSON.parse(savedLeftCollapsed));
+    if (savedRightEnabled) setRightSidebarEnabled(JSON.parse(savedRightEnabled));
+    if (savedRightCollapsed) setRightCollapsed(JSON.parse(savedRightCollapsed));
+
+    setIsHydrated(true);
+  }, []);
+
+  // 💾 SAVE SIDEBAR STATE TO LOCALSTORAGE
+  useEffect(() => {
+    if (!isHydrated) return; // Only save after hydration
+
+    localStorage.setItem("leftSidebarCollapsed", JSON.stringify(leftSidebarCollapsed));
+    localStorage.setItem("rightSidebarEnabled", JSON.stringify(rightSidebarEnabled));
+    localStorage.setItem("rightSidebarCollapsed", JSON.stringify(rightSidebarCollapsed));
+  }, [leftSidebarCollapsed, rightSidebarEnabled, rightSidebarCollapsed, isHydrated]);
+
+  // 🔥 AUTO-COLLAPSE ON SMALL SCREENS (only on first mobile detection)
+  useEffect(() => {
+    if (isMobile && isMobileFirstLoad) {
       setLeftCollapsed(true);
       setRightCollapsed(true);
+      setIsMobileFirstLoad(false);
     }
-  }, [isMobile]);
+  }, [isMobile, isMobileFirstLoad]);
 
   const leftWidth = leftSidebarCollapsed ? SIDEBAR_WIDTH_COLLAPSED : SIDEBAR_WIDTH;
-  const rightWidth =
-    rightSidebarEnabled && !rightSidebarCollapsed && !isMobile
-      ? SIDEBAR_WIDTH
-      : "0px";
+  const rightWidth = rightSidebarEnabled && !rightSidebarCollapsed && !isMobile ? SIDEBAR_WIDTH : "0px";
 
   return (
     <LayoutContext.Provider
@@ -48,8 +70,8 @@ export function LayoutProvider({ children }: { children: ReactNode }) {
         rightSidebarCollapsed,
         isMobile,
         setRightSidebarEnabled,
-        toggleLeftSidebar: () => setLeftCollapsed(v => !v),
-        toggleRightSidebar: () => setRightCollapsed(v => !v),
+        toggleLeftSidebar: () => setLeftCollapsed((v: boolean) => !v),
+        toggleRightSidebar: () => setRightCollapsed((v: boolean) => !v),
       }}
     >
       <div
