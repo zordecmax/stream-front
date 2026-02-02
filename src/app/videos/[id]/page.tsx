@@ -24,7 +24,7 @@ const mapItemToContent = (item: StreamingItem): StreamContent => {
   return {
     id: item.id,
     title: item.title,
-    streamer: 'HYPE',
+    streamer: 'MckyTV',
     streamerAvatar: '/images/avatars/01.png',
     viewers: `${Math.floor(Math.random() * 10000).toLocaleString('de-DE')}`,
     game: item.genre,

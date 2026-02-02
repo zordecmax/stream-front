@@ -9,11 +9,12 @@ interface VideoCardProps {
   image: string;
   avatar: string;
   game: string;
+  onClick?: () => void;
 }
 
-export default function VideoCard({ title, channelName, viewers, category, image, avatar, game }: VideoCardProps) {
+export default function VideoCard({ title, channelName, viewers, category, image, avatar, game, onClick }: VideoCardProps) {
   return (
-    <div className="flex flex-col gap-2 w-80">
+    <div className={`flex flex-col gap-2 w-80 min-w-80 ${onClick ? "cursor-pointer" : ""}`} onClick={onClick}>
       <div className="relative">
         <img src={image} alt={title} className="w-full h-auto object-cover aspect-video" />
         <Button size="sm" className="absolute top-2 right-2">

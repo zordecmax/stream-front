@@ -27,7 +27,7 @@ export default function VideoContent({ content, autoPlay = true }: VideoContentP
                     className="w-full h-full object-contain"
                 />
             ) : 'bunnyConfig' in content && content.bunnyConfig ? (
-                <BunnyVideoPlayer
+                    <BunnyVideoPlayer
                     config={content.bunnyConfig}
                     autoPlay={autoPlay}
                     muted

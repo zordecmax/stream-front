@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { IconSend2, IconSettings, IconArrowBarToRight } from '@tabler/icons-react';
 import Button from '../ui/Button';
 import { Message, ChatMessages } from './Message';
@@ -11,6 +12,49 @@ interface StreamChatProps {
 
 export default function StreamChat({ messages }: StreamChatProps) {
   const { rightSidebarCollapsed, toggleRightSidebar, isMobile } = useLayout();
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+  const [visibleMessages, setVisibleMessages] = useState<ChatMessages[]>([]);
+  const timeoutsRef = useRef<number[]>([]);
+
+  useEffect(() => {
+    timeoutsRef.current.forEach((id) => window.clearTimeout(id));
+    timeoutsRef.current = [];
+    setVisibleMessages([]);
+
+    let accumulatedDelay = 0;
+    messages.forEach((msg) => {
+      const nextDelay = 800 + Math.floor(Math.random() * 2200);
+      accumulatedDelay += nextDelay;
+      const timeoutId = window.setTimeout(() => {
+        setVisibleMessages((prev) => [...prev, msg]);
+      }, accumulatedDelay);
+      timeoutsRef.current.push(timeoutId);
+    });
+
+    return () => {
+      timeoutsRef.current.forEach((id) => window.clearTimeout(id));
+      timeoutsRef.current = [];
+    };
+  }, [messages]);
+
+  useEffect(() => {
+    if (isMobile) {
+      return;
+    }
+    
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }, [visibleMessages]);
+
+  const colors = [
+    'text-red-400',
+    'text-green-400',
+    'text-lime-400',
+    'text-purple-400',
+    'text-orange-400',
+    'text-yellow-400',
+    'text-blue-400',
+  ];
+
   return (
     <>
       <Button
@@ -57,18 +101,22 @@ export default function StreamChat({ messages }: StreamChatProps) {
 
         <div className="space-y-4 flex-1 overflow-y-auto scroll-macos">
 
-          {messages.map((msg, index) => {
-            const colors = [
-              'text-red-400',
-              'text-green-400',
-              'text-lime-400',
-              'text-purple-400',
-              'text-orange-400',
-              'text-yellow-400',
-              'text-blue-400',
-            ];
-            const color = colors[index % colors.length];
+          {
 
+            messages.map((msg, index) => {
+              const color = colors[index % colors.length];
+              return (
+                <Message
+                  key={`0-${index}`}
+                  name={msg.name}
+                  message={msg.message}
+                  color={color}
+                />
+              );
+            })}
+
+          {visibleMessages.map((msg, index) => {
+            const color = colors[index % colors.length];
             return (
               <Message
                 key={index}
@@ -78,28 +126,7 @@ export default function StreamChat({ messages }: StreamChatProps) {
               />
             );
           })}
-
-          {messages.map((msg, index) => {
-            const colors = [
-              'text-red-400',
-              'text-green-400',
-              'text-lime-400',
-              'text-purple-400',
-              'text-orange-400',
-              'text-yellow-400',
-              'text-blue-400',
-            ];
-            const color = colors[index % colors.length];
-
-            return (
-              <Message
-                key={index}
-                name={msg.name}
-                message={msg.message}
-                color={color}
-              />
-            );
-          })}
+          <div ref={bottomRef} />
         </div>
 
         <div className=" shrink-0 flex flex-col gap-2">

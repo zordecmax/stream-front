@@ -5,62 +5,75 @@ export const mockStreamers: StreamerItems[] = [
   {
     name: 'Amar',
     viewers: 233.376,
-    game: 'Counter-Strike'
+    game: 'Counter-Strike',
+    avatar: '/images/avatars/11.png'
   },
   {
     name: 'EliasN97',
     viewers: 47.573,
-    game: 'Live Talk'
+    game: 'Live Talk',
+    avatar: '/images/avatars/12.png'
   },
   {
     name: 'Rosemondy',
     viewers: 6.375,
-    game: 'Apex Legends '
+    game: 'Apex Legends ',
+    avatar: '/images/avatars/13.png'
   },
   {
-    name: 'AbuGoku999',
-    viewers: 9.376,
-    game: 'Poker'
+    name: 'MckyTV',
+    viewers: 5.729,
+    game: 'Arc Raiders',
+    avatar: '/images/avatars/14.png',
+    link: '/videos/0679d9f7-f626-4399-bb8b-1d37613681c9'
   },
   {
     name: 'Trymacs',
     viewers: 14.154,
-    game: 'Dota 2'
+    game: 'Dota 2',
+    avatar: '/images/avatars/15.png'
   },
   {
     name: 'Rohat',
     viewers: 17.928,
-    game: 'Live Talk'
+    game: 'Live Talk',
+    avatar: '/images/avatars/16.png'
   },
   {
     name: 'RezonFN',
     viewers: 8.329,
-    game: 'Fortnite'
+    game: 'Fortnite',
+    avatar: '/images/avatars/17.png'
   },
   {
     name: 'BigSpinRoyale',
     viewers: 4.217,
-    game: 'Clash Royale'
+    game: 'Clash Royale',
+    avatar: '/images/avatars/18.png'
   },
   {
     name: 'RevedTV',
     viewers: 8.926,
-    game: 'Interact'
+    game: 'Interact',
+    avatar: '/images/avatars/19.png'
   },
   {
     name: 'NoWay4uSir',
     viewers: 16.251,
-    game: 'League of Legends'
+    game: 'League of Legends',
+    avatar: '/images/avatars/110.png'
   },
   {
     name: 'Pietro Lombardi',
     viewers: 2.836,
-    game: 'GTA 6'
+    game: 'GTA 6',
+    avatar: '/images/avatars/111.png'
   },
   {
     name: 'xFibii',
     viewers: 1.846,
-    game: 'Musik'
+    game: 'Musik',
+    avatar: '/images/avatars/112.png'
   }
 ];
 
