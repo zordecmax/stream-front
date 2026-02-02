@@ -5,7 +5,7 @@ import VideoCard from '@/components/VideoCard';
 import Badge from "@/components/ui/Badge";
 import { useRouter } from 'next/navigation';
 
-export default function Streams() {
+export default function Home() {
   const router = useRouter();
   return (
     <>

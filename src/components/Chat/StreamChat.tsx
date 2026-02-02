@@ -38,12 +38,10 @@ export default function StreamChat({ messages }: StreamChatProps) {
   }, [messages]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
+    if (isMobile) {
       return;
     }
-    if (window.innerWidth <= 1024) {
-      return;
-    }
+    
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [visibleMessages]);
 

@@ -47,10 +47,7 @@ export default function LiveStreamers({ streamers }: LiveStreamersProps) {
                         game={streamer.game}
                         viewers={streamer.viewers}
                         isLive={true}
-                        {...streamer.link && streamer.link.length > 0 ?
-                        { onClick: () => { router.push(streamer.link!) } }
-                        : {}
-                        }
+                        onClick={streamer.link && streamer.link.length > 0 ? () => router.push(streamer.link!) : undefined}
                     />
                 ))}
             </div>

@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from 'react';
 import TrendingRow, { LiveStreamContent } from '@/components/TrendingRow';
-import RecommendedGrid from '@/components/RecommendedGrid';
 import ContentModal from '@/components/ContentModal';
 import { StreamContent } from '@/components/TrendingRow';
 import { useStreamingData, StreamingItem } from '@/hooks/useStreamingData';
@@ -78,7 +77,7 @@ const mockStreams: StreamContent[] = [
   },
 ];
 
-export default function Home() {
+export default function Streams() {
   const [selectedContent, setSelectedContent] = useState<StreamContent | LiveStreamContent | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
