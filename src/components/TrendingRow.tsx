@@ -3,11 +3,13 @@
 import ContentCard from './ContentCard';
 import type { BunnyVideoConfig } from './BunnyVideoPlayer';
 import { IconSearch } from '@tabler/icons-react';
+import { useRouter } from 'next/navigation';
 
 export interface StreamContent {
   id: string;
   title: string;
   streamer: string;
+  streamerAvatar?: string;
   viewers: string;
   game: string;
   thumbnail?: string;
@@ -41,16 +43,17 @@ export default function TrendingRow({
   loading = false,
 }: TrendingRowProps) {
   const list = items ?? [];
+  const router = useRouter();
 
   return (
     <section className="mb-8 md:mb-12">
-      <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4">
         {title}
       </h2>
 
       {/* Horizontal Scroll Container */}
       <div className="relative group/row">
-        <div className="overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth snap-x snap-mandatory">
+        <div className="overflow-x-auto scroll-macos scroll-smooth snap-x snap-mandatory">
           <div className="flex gap-4 pb-4">
             {loading ? (
               // Loading state: skeletons
@@ -75,6 +78,7 @@ export default function TrendingRow({
                 </div>
               </div>
             ) : (
+
               // Data state: render cards
               list.map((item) => (
                 <div
@@ -83,7 +87,7 @@ export default function TrendingRow({
                 >
                   <ContentCard
                     content={item}
-                    onClick={() => onItemClick(item)}
+                    onClick={() => router.push(`/videos/${item.id}`)}
                   />
                 </div>
               ))

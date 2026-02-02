@@ -1,14 +1,12 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Image from 'next/image';
 import TrendingRow, { LiveStreamContent } from '@/components/TrendingRow';
 import RecommendedGrid from '@/components/RecommendedGrid';
 import ContentModal from '@/components/ContentModal';
 import { StreamContent } from '@/components/TrendingRow';
 import { useStreamingData, StreamingItem } from '@/hooks/useStreamingData';
-import MuxVideoPlayer from '@/components/MuxVideoPlayer';
-import { useLiveStreamingData } from '@/hooks/useLiveStreamingData';
+import SwiperHome from '@/components/SwiperHome';
 
 // Mock data for demonstration
 // Fallback/mock data (currently unused)
@@ -80,8 +78,6 @@ const mockStreams: StreamContent[] = [
   },
 ];
 
-// const categories = [ /* unused in current view */ ];
-
 export default function Home() {
   const [selectedContent, setSelectedContent] = useState<StreamContent | LiveStreamContent | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -92,9 +88,7 @@ export default function Home() {
     refreshInterval: 0, // optional (ms); e.g., 60000 for 1 min
   });
 
-  const { data: liveData, loading: liveLoading, error: liveError, refresh } = useLiveStreamingData({ refreshInterval: 30000 });
-
-
+  // const { data: liveData, loading: liveLoading, error: liveError, refresh } = useLiveStreamingData({ refreshInterval: 30000 });
 
   const CDN_HOSTNAME = 'vz-86921353-a1a.b-cdn.net';
 
@@ -107,7 +101,8 @@ export default function Home() {
       id: item.id,
       title: item.title,
       streamer: 'HYPE',
-      viewers: `${item.rating} ⭐`,
+      streamerAvatar: '/images/avatars/01.png',
+      viewers: `${Math.floor(Math.random() * 10000).toLocaleString('de-DE')}`,
       game: item.genre,
       thumbnail: item.thumbnailUrl,
       tags: item.cast?.slice(0, 3) ?? [],
@@ -136,23 +131,11 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="mb-12">
-        <div className="relative h-[400px] rounded-lg overflow-hidden">
-          <Image
-            src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1920&h=400&fit=crop"
-            alt="Featured content"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
-          <div className="absolute bottom-0 left-0 p-8">
-            <h1 className="text-4xl font-bold text-white mb-2">Ausgewählter Live-Stream</h1>
-            <p className="text-gray-300 text-lg">Schauen Sie sich jetzt die besten Inhalte an</p>
-          </div>
-        </div>
-      </section>
+      <SwiperHome
+        items={liveItems}
+        loading={loading}
+        onItemClick={handleContentClick}
+      />
 
       {/* Live Channels */}
       {/* <TrendingRow
@@ -169,14 +152,12 @@ export default function Home() {
         onItemClick={handleContentClick}
       />
 
-
       {/* Recommended Grid */}
-      <RecommendedGrid
+      {/* <RecommendedGrid
         title="Empfohlen für Sie"
         items={liveItems.length ? liveItems : mockStreams}
         onItemClick={handleContentClick}
-      />
-
+      /> */}
 
       {/* Modal */}
       {selectedContent && (
