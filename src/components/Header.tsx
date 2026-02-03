@@ -98,9 +98,9 @@ export default function Header() {
                         <div className="w-full text-left px-3 py-2 text-sm text-white hover:bg-gray-800 block lg:hidden">
                           {userEmail.replace(/(.{3}).+(@.+)/, '$1…$2')}
                         </div>
-                        <Link href="/live/create" className="block px-3 py-2 text-sm text-white hover:bg-gray-800" onClick={() => setProfileOpen(false)}>
+                        {/* <Link href="/live/create" className="block px-3 py-2 text-sm text-white hover:bg-gray-800" onClick={() => setProfileOpen(false)}>
                           Live erstellen
-                        </Link>
+                        </Link> */}
                         <Link href="/live-streams/my" className="block px-3 py-2 text-sm text-white hover:bg-gray-800" onClick={() => setProfileOpen(false)}>
                           Meine Live-Streams
                         </Link>
@@ -149,7 +149,7 @@ export default function Header() {
                 {userEmail && (
                   <>
                     <NavItem href="/live-streams/my" onClick={() => setMobileOpen(false)} label='Meine Live-Streams' />
-                    <NavItem href="/live/create" onClick={() => setMobileOpen(false)} label='Live erstellen' />
+                    {/* <NavItem href="/live/create" onClick={() => setMobileOpen(false)} label='Live erstellen' /> */}
                   </>
                 )}
               </nav>
