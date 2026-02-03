@@ -9,7 +9,7 @@ import { mockMessages } from "@/data/mockData";
 import StreamChat from "@/components/Chat/StreamChat";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
-import { IconHeart, IconPointFilled, IconUpload, IconDotsVertical } from '@tabler/icons-react';
+import { IconHeart, IconPointFilled, IconUpload, IconDotsVertical, IconUser } from '@tabler/icons-react';
 import { useLayout } from "@/context/LayoutContext";
 import { StreamContent, LiveStreamContent } from '@/components/TrendingRow';
 import { useMemo } from 'react';
@@ -89,7 +89,12 @@ export default function VideoPage() {
                   <Badge variant="primary" className="w-fit">{content.game}</Badge>
                   <Badge variant="primary" className="w-fit">Live <IconPointFilled /></Badge>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-3">
+                  <div className="flex items-center gap-0.5 text-red-500">
+                    <IconUser /> 
+                    <span className="font-bold ">{content.viewers}</span>
+                  </div>
+
                   <IconUpload />
                   <IconDotsVertical />
                 </div>

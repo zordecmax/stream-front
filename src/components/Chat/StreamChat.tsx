@@ -23,7 +23,7 @@ export default function StreamChat({ messages }: StreamChatProps) {
 
     let accumulatedDelay = 0;
     messages.forEach((msg) => {
-      const nextDelay = 800 + Math.floor(Math.random() * 2200);
+      const nextDelay = 800 + Math.floor(Math.random() * 3200);
       accumulatedDelay += nextDelay;
       const timeoutId = window.setTimeout(() => {
         setVisibleMessages((prev) => [...prev, msg]);
@@ -41,7 +41,7 @@ export default function StreamChat({ messages }: StreamChatProps) {
     if (isMobile) {
       return;
     }
-    
+
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [visibleMessages]);
 
