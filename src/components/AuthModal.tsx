@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { IconX } from '@tabler/icons-react';
+import Button from "@/components/ui/Button";
 
 type Mode = 'login' | 'register';
 
@@ -64,8 +65,8 @@ export default function AuthModal({ isOpen, onClose }: { isOpen: boolean; onClos
 
         <div className="px-6 pt-6">
           <div className="flex gap-2 mb-4">
-            <button className={`px-3 py-2 rounded ${mode === 'login' ? 'bg-purple-600' : 'bg-gray-800'}`} onClick={() => setMode('login')}>Anmelden</button>
-            <button className={`px-3 py-2 rounded ${mode === 'register' ? 'bg-purple-600' : 'bg-gray-800'}`} onClick={() => setMode('register')}>Registrieren</button>
+            <Button variant='secondary' onClick={() => setMode('login')}>Anmelden</Button>
+            <Button variant='secondary' onClick={() => setMode('register')}>Registrieren</Button>
           </div>
           <h2 id="auth-title" className="text-xl font-bold mb-2">{mode === 'login' ? 'Willkommen zurück' : 'Erstelle dein Konto'}</h2>
           {userEmail && <p className="text-sm text-gray-400 mb-2">Angemeldet als {userEmail}</p>}
@@ -75,19 +76,19 @@ export default function AuthModal({ isOpen, onClose }: { isOpen: boolean; onClos
           {mode === 'register' && (
             <div>
               <label className="block text-sm text-gray-400 mb-1">Name</label>
-              <input value={name} onChange={(e) => setName(e.target.value)} required className="w-full rounded bg-gray-800 px-3 py-2 outline-none focus:ring-2 focus:ring-purple-600" placeholder="Ihr Name" />
+              <input value={name} onChange={(e) => setName(e.target.value)} required className="w-full rounded bg-gray-800 px-3 py-2 outline-none focus:ring-2 focus:ring-primary" placeholder="Ihr Name" />
             </div>
           )}
           <div>
             <label className="block text-sm text-gray-400 mb-1">E-Mail</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full rounded bg-gray-800 px-3 py-2 outline-none focus:ring-2 focus:ring-purple-600" placeholder="sie@beispiel.de" />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full rounded bg-gray-800 px-3 py-2 outline-none focus:ring-2 focus:ring-primary" placeholder="sie@beispiel.de" />
           </div>
           <div>
             <label className="block text-sm text-gray-400 mb-1">Passwort</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full rounded bg-gray-800 px-3 py-2 outline-none focus:ring-2 focus:ring-purple-600" placeholder="••••••••" />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full rounded bg-gray-800 px-3 py-2 outline-none focus:ring-2 focus:ring-primary" placeholder="••••••••" />
           </div>
           {error && <div className="text-red-400 text-sm">{error}</div>}
-          <button type="submit" disabled={loading} className="w-full py-2 rounded bg-purple-600 hover:bg-purple-500 font-semibold">{loading ? 'Bitte warten…' : mode === 'login' ? 'Anmelden' : 'Registrieren'}</button>
+          <Button type="submit" disabled={loading}>{loading ? 'Bitte warten…' : mode === 'login' ? 'Anmelden' : 'Registrieren'}</Button>
         </form>
       </div>
     </div>
