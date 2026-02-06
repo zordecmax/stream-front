@@ -8,7 +8,8 @@ import NavItem from './NavItem';
 import { IconBell, IconSearch, IconMenu2, IconChevronDown } from '@tabler/icons-react';
 import { Suspense } from 'react';
 import SearchForm from './SearchForm';
-import Button from './ui/Button';
+import Button from "@/components/ui/Button";
+
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [authOpen, setAuthOpen] = useState(false);
@@ -116,9 +117,9 @@ export default function Header() {
                 </div>
               ) : (
 
-                <button onClick={() => setAuthOpen(true)} className="bg-purple-600 hover:bg-purple-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors">
+                <Button onClick={() => setAuthOpen(true)} >
                   Anmelden
-                </button>
+                </Button>
               )}
 
               {/* Mobile Menu */}
@@ -177,7 +178,6 @@ export default function Header() {
                 <Button variant='transparent' onClick={() => setMobileSearchOpen(false)} >
                   Abbrechen
                 </Button>
-
               </div>
             </div>
           </div>
