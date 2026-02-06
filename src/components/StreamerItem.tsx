@@ -30,7 +30,7 @@ const StreamerItem: React.FC<StreamerItemProps> = ({
     const { leftSidebarCollapsed } = useLayout();
     return (
         <div className={`flex gap-2 items-center ${onClick ? "cursor-pointer" : ""}`} onClick={onClick}>
-            <img src={avatar} alt={name} className='w-fit object-cover aspect-square rounded-full' />
+            <img src={avatar} alt={name} className='w-9 object-cover aspect-square rounded-full' />
             {!leftSidebarCollapsed &&
                 <>
                     <div className='flex flex-col grow'>
