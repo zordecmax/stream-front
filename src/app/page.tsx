@@ -10,16 +10,29 @@ export default function Home() {
   return (
     <>
       <div className="relative">
-        <img src="/images/thumbnails/stream-pic.png" alt="" className='w-full' />
-        <Badge variant="semitransparent" size="lg" className="absolute bottom-6 right-6">Zuschauer - 223.900</Badge>
+        <div className="video-container w-full aspect-2/1 md:aspect-4/1 lg:aspect-11/3 rounded-lg overflow-hidden">
+          <video
+            className="w-full h-full object-cover bg-black/20"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+          >
+            <source src="https://vz-86921353-a1a.b-cdn.net/f176bd75-a4b7-4eb0-a320-b9afde87b9bc/play_720p.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <Badge variant="semitransparent" size="lg" className="absolute bottom-6 right-6">Zuschauer - 12,364</Badge>
       </div>
+
       <h1 className='text-3xl font-bold'>Live-Streams</h1>
 
       <div className="flex gap-5 w-full overflow-x-auto min-w-0 scroll-macos">
         <VideoCard
           title="Mein erster Stream"
           channelName="EliasN97"
-          viewers={128404}
+          viewers={12364}
           category="Live"
           image="/images/thumbnails/i1.png"
           avatar="/images/avatars/11.png"
@@ -35,6 +48,7 @@ export default function Home() {
           image="/images/thumbnails/i2.png"
           avatar="/images/avatars/12.png"
           game="Apex Legends"
+          onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
         />
 
         <VideoCard
@@ -45,6 +59,7 @@ export default function Home() {
           image="/images/thumbnails/i3.png"
           avatar="/images/avatars/13.png"
           game="Poker"
+          onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
         />
 
         <VideoCard
@@ -55,6 +70,7 @@ export default function Home() {
           image="/images/thumbnails/i4.png"
           avatar="/images/avatars/14.png"
           game="Fortnite"
+          onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
         />
       </div>
 

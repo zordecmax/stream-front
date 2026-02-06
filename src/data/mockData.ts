@@ -25,7 +25,7 @@ export const mockStreamers: StreamerItems[] = [
   },
   {
     name: 'MckyTV',
-    viewers: 5.729,
+    viewers: 12.364,
     game: 'Arc Raiders',
     avatar: '/images/avatars/14.png',
     link: '/videos/0679d9f7-f626-4399-bb8b-1d37613681c9'
