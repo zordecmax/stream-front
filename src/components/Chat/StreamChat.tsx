@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { IconSend2, IconSettings, IconArrowBarToRight } from '@tabler/icons-react';
+import { IconSend2, IconSettings, IconArrowBarToRight, IconChevronsDown } from '@tabler/icons-react';
 import Button from '../ui/Button';
 import { Message, ChatMessages } from './Message';
 import { useLayout } from "@/context/LayoutContext";
+import { useInfiniteChat } from "@/hooks/useInfiniteChat";
 
 interface StreamChatProps {
   messages: ChatMessages[];
@@ -13,37 +14,50 @@ interface StreamChatProps {
 export default function StreamChat({ messages }: StreamChatProps) {
   const { rightSidebarCollapsed, toggleRightSidebar, isMobile } = useLayout();
   const bottomRef = useRef<HTMLDivElement | null>(null);
-  const [visibleMessages, setVisibleMessages] = useState<ChatMessages[]>([]);
-  const timeoutsRef = useRef<number[]>([]);
+  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
+  const [newMessageCount, setNewMessageCount] = useState(0);
 
-  useEffect(() => {
-    timeoutsRef.current.forEach((id) => window.clearTimeout(id));
-    timeoutsRef.current = [];
-    setVisibleMessages([]);
-
-    let accumulatedDelay = 0;
-    messages.forEach((msg) => {
-      const nextDelay = 800 + Math.floor(Math.random() * 3200);
-      accumulatedDelay += nextDelay;
-      const timeoutId = window.setTimeout(() => {
-        setVisibleMessages((prev) => [...prev, msg]);
-      }, accumulatedDelay);
-      timeoutsRef.current.push(timeoutId);
-    });
-
-    return () => {
-      timeoutsRef.current.forEach((id) => window.clearTimeout(id));
-      timeoutsRef.current = [];
-    };
-  }, [messages]);
+  const streamedMessages = useInfiniteChat(messages, {
+    minDelay: 2000,
+    maxDelay: 5000,
+  });
 
   useEffect(() => {
     if (isMobile) {
       return;
     }
 
+    if (autoScrollEnabled) {
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      setNewMessageCount(0);
+    } else {
+      setNewMessageCount((count) => count + 1);
+    }
+  }, [streamedMessages, autoScrollEnabled, isMobile]);
+
+  const handleScroll = () => {
+    const container = scrollContainerRef.current;
+    if (!container) {
+      return;
+    }
+
+    const threshold = 90;
+    const isAtBottom =
+      container.scrollTop + container.clientHeight >=
+      container.scrollHeight - threshold;
+
+    setAutoScrollEnabled(isAtBottom);
+    if (isAtBottom) {
+      setNewMessageCount(0);
+    }
+  };
+
+  const scrollToBottom = () => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, [visibleMessages]);
+    setAutoScrollEnabled(true);
+    setNewMessageCount(0);
+  };
 
   const colors = [
     'text-red-400',
@@ -99,10 +113,13 @@ export default function StreamChat({ messages }: StreamChatProps) {
           </button>
         </div>
 
-        <div className="space-y-4 flex-1 overflow-y-auto scroll-macos">
+        <div
+          ref={scrollContainerRef}
+          onScroll={handleScroll}
+          className="relative space-y-4 flex-1 overflow-y-auto scroll-macos"
+        >
 
           {
-
             messages.map((msg, index) => {
               const color = colors[index % colors.length];
               return (
@@ -113,23 +130,44 @@ export default function StreamChat({ messages }: StreamChatProps) {
                   color={color}
                 />
               );
-            })}
+            })
+          }
 
-          {visibleMessages.map((msg, index) => {
-            const color = colors[index % colors.length];
-            return (
-              <Message
-                key={index}
-                name={msg.name}
-                message={msg.message}
-                color={color}
-              />
-            );
-          })}
+          {
+            streamedMessages.map((msg, index) => {
+              const color = colors[index % colors.length];
+              return (
+                <Message
+                  key={index}
+                  name={msg.name}
+                  message={msg.message}
+                  color={color}
+                />
+              )
+            })
+          }
+
           <div ref={bottomRef} />
+
+
         </div>
 
-        <div className=" shrink-0 flex flex-col gap-2">
+        <div className=" shrink-0 flex flex-col gap-2 relative">
+
+          {!autoScrollEnabled && newMessageCount > 0 ? (
+            <Button
+              type="button"
+              size="sm"
+              variant="secondary"
+              className="absolute -top-14 right-2 left-2 z-10 flex items-center justify-center gap-2"
+              onClick={scrollToBottom}
+            >
+              <IconChevronsDown className="w-5 h-5" />
+              New messages
+              <span className="py-0.5 px-1 bg-red-500 rounded-full text-white">{newMessageCount}</span>
+
+            </Button>
+          ) : null}
           <form className="relative" action="/send" method="GET">
             <input
               type="text"
