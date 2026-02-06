@@ -12,7 +12,7 @@ export default function Home() {
       <div className="relative">
         <div className="video-container w-full aspect-2/1 md:aspect-4/1 lg:aspect-11/3 rounded-lg overflow-hidden">
           <video
-            className="w-full h-full object-cover bg-black/20"
+            className="w-full object-cover bg-black/20 object-top h-full"
             autoPlay
             muted
             controls
@@ -24,7 +24,7 @@ export default function Home() {
             Your browser does not support the video tag.
           </video>
         </div>
-        <Badge variant="semitransparent" size="lg" className="absolute bottom-6 right-6">Zuschauer - 12,364</Badge>
+        <Badge variant="semitransparent" size="lg" className="absolute bottom-6 right-6">Zuschauer - 221,364</Badge>
       </div>
 
       <h1 className='text-3xl font-bold'>Live-Streams</h1>
@@ -38,7 +38,7 @@ export default function Home() {
           image="/images/thumbnails/new/01.jpg"
           avatar="/images/avatars/EliasN97.png"
           game="Live-Gespräch"
-          onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
+          onClick={() => { router.push('/videos/6f8d260d-cc55-4dff-a918-d6dee2f48a5e') }}
         />
 
         <VideoCard
@@ -49,7 +49,7 @@ export default function Home() {
           image="/images/thumbnails/new/02.jpg"
           avatar="/images/avatars/Rosemondy.png"
           game="Poker"
-          onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
+          onClick={() => { router.push('/videos/6f8d260d-cc55-4dff-a918-d6dee2f48a5e') }}
         />
 
         <VideoCard
@@ -60,7 +60,7 @@ export default function Home() {
           image="/images/thumbnails/new/03.jpg"
           avatar="/images/avatars/AbuGoku999.png"
           game="Apex Legends"
-          onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
+          onClick={() => { router.push('/videos/6f8d260d-cc55-4dff-a918-d6dee2f48a5e') }}
         />
 
         <VideoCard
@@ -71,7 +71,7 @@ export default function Home() {
           image="/images/thumbnails/new/04.jpg"
           avatar="/images/avatars/Trymacs.png"
           game="Fortnite"
-          onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
+          onClick={() => { router.push('/videos/6f8d260d-cc55-4dff-a918-d6dee2f48a5e') }}
         />
 
         <VideoCard
@@ -82,7 +82,7 @@ export default function Home() {
           image="/images/thumbnails/new/05.jpg"
           avatar="/images/avatars/Rohat.png"
           game="Fortnite"
-          onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
+          onClick={() => { router.push('/videos/6f8d260d-cc55-4dff-a918-d6dee2f48a5e') }}
         />
       </div>
 
