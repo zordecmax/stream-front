@@ -92,7 +92,7 @@ export default function VideoPage() {
                 <div className="flex gap-3">
                   <div className="flex items-center gap-0.5 text-red-500">
                     <IconUser /> 
-                    <span className="font-bold ">{content.viewers}</span>
+                    <span className="font-bold ">12,364</span>
                   </div>
 
                   <IconUpload />
@@ -103,7 +103,7 @@ export default function VideoPage() {
               <div className="bg-gray-800/80 p-4 rounded-lg space-y-4">
                 <h3 className="text-lg font-semibold">{content.title}</h3>
                 <p className="text-lg">
-                  {content.viewers} Zuschauer
+                  12,364 Zuschauer
                 </p>
                 <p className="text-gray-300">
                   Willkommen zu meinem Stream! Heute werden wir spannende Spiele spielen und viel Spaß haben. Vergesst nicht, den Kanal zu abonnieren und die Glocke zu aktivieren, um keine Streams zu verpassen!
