@@ -16,7 +16,7 @@ export default function VideoCard({ title, channelName, viewers, category, image
   return (
     <div className={`flex flex-col gap-2 w-80 min-w-80 ${onClick ? "cursor-pointer" : ""}`} onClick={onClick}>
       <div className="relative overflow-hidden rounded-lg">
-        <img src={image} alt={title} className="w-full h-auto object-cover aspect-video scale-20" />
+        <img src={image} alt={title} className="w-full h-auto object-cover aspect-video scale-[1.2]" />
         <Button size="sm" className="absolute top-2 right-2">
           {category}
         </Button>
