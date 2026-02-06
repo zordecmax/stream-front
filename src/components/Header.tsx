@@ -15,7 +15,8 @@ export default function Header() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
-  const { userEmail, logout } = useAuth();
+  // const { userEmail, logout } = useAuth();
+  const userEmail = "rodiehlmagenta75x";
 
   // Initialize searchQuery from the current URL on the client
   useEffect(() => {
@@ -84,24 +85,24 @@ export default function Header() {
                     aria-expanded={profileOpen}
                     onClick={() => setProfileOpen((v) => !v)}
                   >
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm">
-                      {userEmail.charAt(0).toUpperCase()}
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-sm">
+                      <img src="/images/user-avatar.png" alt="User Avatar" className="w-9 h-9 rounded-full" />
                     </div>
                     <span className='hidden lg:inline'>{userEmail.replace(/(.{3}).+(@.+)/, '$1…$2')}</span>
-                    <IconChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${profileOpen ? 'rotate-180' : ''}`} />
+                    {/* <IconChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${profileOpen ? 'rotate-180' : ''}`} /> */}
                   </button>
 
                   {/* Dropdown */}
-                  {profileOpen && (
+                  {/* {profileOpen && (
                     <div className="absolute right-0 mt-2 w-56 rounded-lg border border-gray-800 bg-gray-900 shadow-lg z-50">
                       <div className="py-2">
                         <div className="w-full text-left px-3 py-2 text-sm text-white hover:bg-gray-800 block lg:hidden">
                           {userEmail.replace(/(.{3}).+(@.+)/, '$1…$2')}
-                        </div>
+                        </div> */}
                         {/* <Link href="/live/create" className="block px-3 py-2 text-sm text-white hover:bg-gray-800" onClick={() => setProfileOpen(false)}>
                           Live erstellen
                         </Link> */}
-                        <Link href="/live-streams/my" className="block px-3 py-2 text-sm text-white hover:bg-gray-800" onClick={() => setProfileOpen(false)}>
+                        {/* <Link href="/live-streams/my" className="block px-3 py-2 text-sm text-white hover:bg-gray-800" onClick={() => setProfileOpen(false)}>
                           Meine Live-Streams
                         </Link>
                         <button
@@ -112,7 +113,7 @@ export default function Header() {
                         </button>
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </div>
               ) : (
 
