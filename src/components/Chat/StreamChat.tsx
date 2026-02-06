@@ -164,7 +164,7 @@ export default function StreamChat({ messages }: StreamChatProps) {
             >
               <IconChevronsDown className="w-5 h-5" />
               New messages
-              <span className="p-0.5 w-5 h-5 bg-red-500 rounded-full text-white">{newMessageCount}</span>
+              <span className="py-0.5 px-1 bg-red-500 rounded-full text-white">{newMessageCount}</span>
 
             </Button>
           ) : null}
