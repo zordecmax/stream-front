@@ -5,6 +5,7 @@ import { IconSend2, IconSettings, IconArrowBarToRight } from '@tabler/icons-reac
 import Button from '../ui/Button';
 import { Message, ChatMessages } from './Message';
 import { useLayout } from "@/context/LayoutContext";
+import { useInfiniteChat } from "@/hooks/useInfiniteChat";
 
 interface StreamChatProps {
   messages: ChatMessages[];
@@ -13,29 +14,11 @@ interface StreamChatProps {
 export default function StreamChat({ messages }: StreamChatProps) {
   const { rightSidebarCollapsed, toggleRightSidebar, isMobile } = useLayout();
   const bottomRef = useRef<HTMLDivElement | null>(null);
-  const [visibleMessages, setVisibleMessages] = useState<ChatMessages[]>([]);
-  const timeoutsRef = useRef<number[]>([]);
 
-  useEffect(() => {
-    timeoutsRef.current.forEach((id) => window.clearTimeout(id));
-    timeoutsRef.current = [];
-    setVisibleMessages([]);
-
-    let accumulatedDelay = 0;
-    messages.forEach((msg) => {
-      const nextDelay = 800 + Math.floor(Math.random() * 3200);
-      accumulatedDelay += nextDelay;
-      const timeoutId = window.setTimeout(() => {
-        setVisibleMessages((prev) => [...prev, msg]);
-      }, accumulatedDelay);
-      timeoutsRef.current.push(timeoutId);
-    });
-
-    return () => {
-      timeoutsRef.current.forEach((id) => window.clearTimeout(id));
-      timeoutsRef.current = [];
-    };
-  }, [messages]);
+  const streamedMessages = useInfiniteChat(messages, {
+    minDelay: 2000,
+    maxDelay: 3000,
+  });
 
   useEffect(() => {
     if (isMobile) {
@@ -43,7 +26,7 @@ export default function StreamChat({ messages }: StreamChatProps) {
     }
 
     bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, [visibleMessages]);
+  }, [streamedMessages]);
 
   const colors = [
     'text-red-400',
@@ -102,7 +85,6 @@ export default function StreamChat({ messages }: StreamChatProps) {
         <div className="space-y-4 flex-1 overflow-y-auto scroll-macos">
 
           {
-
             messages.map((msg, index) => {
               const color = colors[index % colors.length];
               return (
@@ -113,19 +95,23 @@ export default function StreamChat({ messages }: StreamChatProps) {
                   color={color}
                 />
               );
-            })}
+            })
+          }
 
-          {visibleMessages.map((msg, index) => {
-            const color = colors[index % colors.length];
-            return (
-              <Message
-                key={index}
-                name={msg.name}
-                message={msg.message}
-                color={color}
-              />
-            );
-          })}
+          {
+            streamedMessages.map((msg, index) => {
+              const color = colors[index % colors.length];
+              return (
+                <Message
+                  key={index}
+                  name={msg.name}
+                  message={msg.message}
+                  color={color}
+                />
+              )
+            })
+          }
+
           <div ref={bottomRef} />
         </div>
 
