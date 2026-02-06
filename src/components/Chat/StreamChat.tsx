@@ -23,18 +23,28 @@ export default function StreamChat({ messages }: StreamChatProps) {
     maxDelay: 5000,
   });
 
+  const prevMessagesLengthRef = useRef(streamedMessages.length);
   useEffect(() => {
     if (isMobile) {
+      prevMessagesLengthRef.current = streamedMessages.length;
       return;
     }
-
+    const prevLength = prevMessagesLengthRef.current;
+    const currentLength = streamedMessages.length;
+    // Only react when the number of streamed messages actually increases.
+    if (currentLength <= prevLength) {
+      prevMessagesLengthRef.current = currentLength;
+      return;
+    }
+    const newMessages = currentLength - prevLength;
+    prevMessagesLengthRef.current = currentLength;
     if (autoScrollEnabled) {
       bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
       setNewMessageCount(0);
     } else {
-      setNewMessageCount((count) => count + 1);
+      setNewMessageCount((count) => count + newMessages);
     }
-  }, [streamedMessages, autoScrollEnabled, isMobile]);
+  }, [streamedMessages.length, autoScrollEnabled, isMobile]);
 
   const handleScroll = () => {
     const container = scrollContainerRef.current;
@@ -143,7 +153,7 @@ export default function StreamChat({ messages }: StreamChatProps) {
                   message={msg.message}
                   color={color}
                 />
-              )
+              );
             })
           }
 

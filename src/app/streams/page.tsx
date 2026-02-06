@@ -100,7 +100,7 @@ export default function Streams() {
       id: item.id,
       title: item.title,
       streamer: 'HYPE',
-      streamerAvatar: '/images/avatars/01.png',
+      streamerAvatar: `/images/avatars/1${Math.floor(Math.random() * 12)+1}.png`,
       viewers: `${Math.floor(Math.random() * 10000).toLocaleString('de-DE')}`,
       game: item.genre,
       thumbnail: item.thumbnailUrl,
