@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <div className="relative">
         {/* <div className="video-container w-full aspect-2/1 md:aspect-4/1 lg:aspect-11/3 rounded-lg overflow-hidden"> */}
-        <div className="video-container w-full aspect-2/1 md:aspect-8/4 lg:aspect-8/4 rounded-lg overflow-hidden">
+        <div className="video-container w-full aspect-2/1 md:aspect-12/4 lg:aspect-12/4 rounded-lg overflow-hidden">
           <video
             className="w-full object-cover bg-black/20 object-top h-full"
             autoPlay
