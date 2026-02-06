@@ -15,6 +15,7 @@ export default function Home() {
             className="w-full h-full object-cover bg-black/20"
             autoPlay
             muted
+            controls
             loop
             playsInline
             preload="metadata"
@@ -32,43 +33,54 @@ export default function Home() {
         <VideoCard
           title="Mein erster Stream"
           channelName="EliasN97"
-          viewers={12364}
+          viewers={47537}
           category="Live"
-          image="/images/thumbnails/i1.png"
-          avatar="/images/avatars/11.png"
+          image="/images/thumbnails/new/01.jpg"
+          avatar="/images/avatars/EliasN97.png"
           game="Live-Gespräch"
           onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
         />
 
         <VideoCard
-          title="Spieldurchlauf"
+          title="Auf Sieg aus"
           channelName="Rosemondy"
-          viewers={89404}
+          viewers={6375}
           category="Live"
-          image="/images/thumbnails/i2.png"
-          avatar="/images/avatars/12.png"
-          game="Apex Legends"
+          image="/images/thumbnails/new/02.jpg"
+          avatar="/images/avatars/Rosemondy.png"
+          game="Poker"
           onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
         />
 
         <VideoCard
-          title="Auf Sieg aus"
+          title="Spieldurchlauf"
           channelName="AbuGoku999"
-          viewers={18948}
+          viewers={9367}
           category="Live"
-          image="/images/thumbnails/i3.png"
-          avatar="/images/avatars/13.png"
-          game="Poker"
+          image="/images/thumbnails/new/03.jpg"
+          avatar="/images/avatars/AbuGoku999.png"
+          game="Apex Legends"
           onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
         />
 
         <VideoCard
           title="Lass uns den ganzen Tag spielen"
           channelName="Trymacs"
-          viewers={1804}
+          viewers={14154}
           category="Live"
-          image="/images/thumbnails/i4.png"
-          avatar="/images/avatars/14.png"
+          image="/images/thumbnails/new/04.jpg"
+          avatar="/images/avatars/Trymacs.png"
+          game="Fortnite"
+          onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
+        />
+
+        <VideoCard
+          title="Lass uns den ganzen Tag spielen"
+          channelName="Rohat"
+          viewers={17928}
+          category="Live"
+          image="/images/thumbnails/new/05.jpg"
+          avatar="/images/avatars/Rohat.png"
           game="Fortnite"
           onClick={() => { router.push('/videos/0679d9f7-f626-4399-bb8b-1d37613681c9') }}
         />
